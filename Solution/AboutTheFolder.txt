@@ -1,0 +1,1 @@
+This contains all project related parts. UI, Backend and DB
