@@ -13,6 +13,16 @@ func LogError(message string){
 	writeFile(ErrorPath, message)
 }
 
+func LogProcess(message string){
+	var LogProcessActive = "False"
+	if(LogProcessActive =="True") {
+		var today = time.Now().Format("01-02-2006")
+		var ProcessLogPath = "C:/Users/abhis/OneDrive/Documents/GitHub/CareFreeHomeLogs/CFHProcessLog" + today + ".txt"
+		createFile(ProcessLogPath)
+		writeFile(ProcessLogPath, message)
+	}
+}
+
 func checkError(err error) {
 	if err != nil {
 		fmt.Println(err.Error())
