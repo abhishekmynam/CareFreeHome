@@ -8,9 +8,8 @@ var React = require('react');
 var LoginPage = React.createClass({
     render: function() {
         return (
-            <div className = "jumbotron" >
-                <h1> CFH login page </h1>
-                <p> react and node app</p>
+            <div className="jumbotron">
+                <h1> Hello from bootstrap</h1>
             </div>
         );
     }

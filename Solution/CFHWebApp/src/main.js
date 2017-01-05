@@ -4,6 +4,9 @@
 $ = jQuery = require('jquery');
 
 var React = require('react');
+var ReactDom = require('react-dom');
 var LoginPage = require('./components/LoginPage');
 
-React.render(<LoginPage />, document.getElementById('app'));
+//var App = console.log('hello')
+//module.exports = App;
+ReactDom.render(<LoginPage />, document.getElementById('app'));
