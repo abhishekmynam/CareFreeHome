@@ -10,6 +10,7 @@ var LoginPage = React.createClass({
         return (
             <div className = "jumbotron" >
                 <h1> CFH login page </h1>
+                <p> react and node app</p>
             </div>
         );
     }
