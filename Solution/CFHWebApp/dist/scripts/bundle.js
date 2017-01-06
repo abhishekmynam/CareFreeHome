@@ -30692,23 +30692,89 @@ var LoginPage= React.createClass({displayName: "LoginPage",
                 React.createElement("div", {className: "jumbotron"}, 
                     React.createElement("h1", null, " Welcome to Care Free Home")
                 ), 
+                React.createElement("div", null, 
+                    React.createElement("p", null, " "), 
+                    React.createElement("p", null, " "), 
+                    React.createElement("p", null, " "), 
+                    React.createElement("p", null, " Login In")
+                ), 
                 React.createElement("div", {className: "container"}, 
-                    React.createElement("div", {class: "form-group"}, 
-                        React.createElement("label", {for: "usr"}, "User Name"), 
-                        React.createElement("input", {type: "text", class: "form-control", id: "usr"})
-                    ), 
-                    React.createElement("div", {class: "form-group"}, 
-                        React.createElement("label", {for: "pwd"}, "Password "), 
-                        React.createElement("input", {type: "password", class: "form-control", id: "pwd"})
+                    React.createElement("form", {className: "form-inline"}, 
+                        React.createElement("div", {className: "form-group"}, 
+                            React.createElement("label", {htmlFor: "user_name"}, "User Name:"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "email", placeholder: "Enter User Name"})
+                        ), 
+                        React.createElement("div", {className: "form-group"}, 
+                            React.createElement("label", {htmlFor: "pwd"}, "Password:"), 
+                            React.createElement("input", {type: "password", className: "form-control", id: "pwd", placeholder: "Enter password"})
+                        ), 
+                        React.createElement("button", {type: "submit", className: "btn btn-default"}, "Submit")
                     )
+                ), 
+                React.createElement("div", null, 
+                    React.createElement("p", null, " "), 
+                    React.createElement("p", null, " "), 
+                    React.createElement("p", null, " "), 
+                    React.createElement("p", null, " Sign Up")
+                ), 
+                React.createElement("div", {className: "container"}, 
+                    React.createElement("form", {className: "form-inline"}, 
+                        React.createElement("div", {className: "form-group"}, 
+                            React.createElement("label", {htmlFor: "usr"}, "First Name:"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "First_Name", placeholder: "Enter First Name"})
+                        ), 
+                        React.createElement("div", {className: "form-group"}, 
+                            React.createElement("label", {htmlFor: "last_name"}, "Last Name:"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "last_name", placeholder: "Enter Last Name"})
+                        )
+                    ), 
+                        React.createElement("div", {className: "form-group"}, 
+                            React.createElement("label", {htmlFor: "email"}, "email id:"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "emailId", placeholder: "Enter email id"})
+                        ), 
+                        React.createElement("div", {className: "form-group"}, 
+                            React.createElement("label", {htmlFor: "ph_no"}, "Phone Number:"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "phNo", placeholder: "Enter Phone Number"})
+                        ), 
+                        React.createElement("div", {className: "form-group"}, 
+                            React.createElement("label", {htmlFor: "address"}, "Address:"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "address", placeholder: "Enter Address"})
+                        ), 
+                    React.createElement("form", {className: "form-inline"}, 
+                        React.createElement("div", {className: "form-group"}, 
+                            React.createElement("label", {htmlFor: "city"}, "City:"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "city", placeholder: "Enter City"})
+                        ), 
+                        React.createElement("div", {className: "form-group"}, 
+                            React.createElement("label", {htmlFor: "zipcode"}, "Zip Code:"), 
+                            React.createElement("input", {type: "text", className: "form-control", id: "zipCode", placeholder: "Enter Zip Code"})
+                        )
+                    ), 
+                    React.createElement("div", {className: "dropdown"}, 
+                        React.createElement("button", {className: "btn btn-default dropdown-toggle", type: "button", id: "menu1", "data-toggle": "dropdown"}, "State", 
+                            React.createElement("span", {className: "caret"})), 
+                        React.createElement("ul", {className: "dropdown-menu", role: "menu", "aria-labelledby": "menu1"}, 
+                            React.createElement("li", {role: "presentation"}, React.createElement("a", {role: "menuitem", tabIndex: "-1", href: "#"}, "HTML")), 
+                            React.createElement("li", {role: "presentation"}, React.createElement("a", {role: "menuitem", tabIndex: "-1", href: "#"}, "CSS")), 
+                            React.createElement("li", {role: "presentation"}, React.createElement("a", {role: "menuitem", tabIndex: "-1", href: "#"}, "JavaScript"))
+                        )
+                    ), 
+                    React.createElement("div", {className: "dropdown"}, 
+                        React.createElement("button", {className: "btn btn-default dropdown-toggle", type: "button", id: "menu1", "data-toggle": "dropdown"}, "Country", 
+                            React.createElement("span", {className: "caret"})), 
+                        React.createElement("ul", {className: "dropdown-menu", role: "menu", "aria-labelledby": "menu1"}, 
+                            React.createElement("li", {role: "presentation"}, React.createElement("a", {role: "menuitem", tabIndex: "-1", href: "#"}, "HTML")), 
+                            React.createElement("li", {role: "presentation"}, React.createElement("a", {role: "menuitem", tabIndex: "-1", href: "#"}, "CSS")), 
+                            React.createElement("li", {role: "presentation"}, React.createElement("a", {role: "menuitem", tabIndex: "-1", href: "#"}, "JavaScript"))
+                        )
+                    )
+
                 )
             )
 
         );
     }
 });
-
-
 module.exports=LoginPage;
 
 },{"react":179}],181:[function(require,module,exports){
