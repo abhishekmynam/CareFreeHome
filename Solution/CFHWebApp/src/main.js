@@ -7,6 +7,4 @@ var React = require('react');
 var ReactDom = require('react-dom');
 var LoginPage = require('./components/LoginPage');
 
-//var App = console.log('hello')
-//module.exports = App;
 ReactDom.render(<LoginPage />, document.getElementById('app'));

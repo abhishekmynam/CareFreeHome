@@ -5,14 +5,28 @@
 
 var React = require('react');
 
-var LoginPage = React.createClass({
+var LoginPage= React.createClass({
     render: function() {
         return (
-            <div className="jumbotron">
-                <h1> Hello from bootstrap</h1>
+            <div>
+                <div className="jumbotron">
+                    <h1> Welcome to Care Free Home</h1>
+                </div>
+                <div className="container">
+                    <div class="form-group">
+                        <label for="usr">User Name</label>
+                        <input type="text" class="form-control" id="usr"></input>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Password </label>
+                        <input type="password" class="form-control" id="pwd"></input>
+                    </div>
+                </div>
             </div>
+
         );
     }
 });
+
 
 module.exports=LoginPage;

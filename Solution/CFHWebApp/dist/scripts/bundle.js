@@ -30685,15 +30685,29 @@ module.exports = require('./lib/React');
 
 var React = require('react');
 
-var LoginPage = React.createClass({displayName: "LoginPage",
+var LoginPage= React.createClass({displayName: "LoginPage",
     render: function() {
         return (
-            React.createElement("div", {className: "jumbotron"}, 
-                React.createElement("h1", null, " Hello from bootstrap")
+            React.createElement("div", null, 
+                React.createElement("div", {className: "jumbotron"}, 
+                    React.createElement("h1", null, " Welcome to Care Free Home")
+                ), 
+                React.createElement("div", {className: "container"}, 
+                    React.createElement("div", {class: "form-group"}, 
+                        React.createElement("label", {for: "usr"}, "User Name"), 
+                        React.createElement("input", {type: "text", class: "form-control", id: "usr"})
+                    ), 
+                    React.createElement("div", {class: "form-group"}, 
+                        React.createElement("label", {for: "pwd"}, "Password "), 
+                        React.createElement("input", {type: "password", class: "form-control", id: "pwd"})
+                    )
+                )
             )
+
         );
     }
 });
+
 
 module.exports=LoginPage;
 
@@ -30707,8 +30721,6 @@ var React = require('react');
 var ReactDom = require('react-dom');
 var LoginPage = require('./components/LoginPage');
 
-//var App = console.log('hello')
-//module.exports = App;
 ReactDom.render(React.createElement(LoginPage, null), document.getElementById('app'));
 
 },{"./components/LoginPage":180,"jquery":24,"react":179,"react-dom":26}]},{},[181]);
