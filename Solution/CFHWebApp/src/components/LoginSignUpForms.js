@@ -3,7 +3,6 @@
  */
 "use strict";
 var React = require('react');
-//var DBServiceCalls = require('../services/DBserviceCalls');
 
 var LoginPageForms = React.createClass({
     createUser: function(event){
@@ -66,7 +65,7 @@ var LoginPageForms = React.createClass({
                     </form>
                     <div className="form-group">
                         <label htmlFor="ph_no">Phone Number:</label>
-                        <input type="number" name="ph_no" className="form-control" id="phNo"
+                        <input type="tel" name="ph_no" className="form-control" id="phNo"
                                placeholder="Enter Phone Number" onChange={this.props.onChange} value={this.props.user.ph_no}></input>
                     </div>
                     <div className="form-group">
@@ -104,6 +103,7 @@ var LoginPageForms = React.createClass({
                                     <li role="presentation"><a role="menuitem" tabIndex="-1" href="#">JavaScript</a></li>
                                     </ul>
                                 </div>
+                    <button type="submit" value="Save" className="btn btn-default" onClick={this.props.onSave}>Submit</button>
                     </div>
             </div>
         );

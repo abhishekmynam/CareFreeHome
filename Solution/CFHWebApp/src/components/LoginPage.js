@@ -5,6 +5,7 @@
 
 var React = require('react');
 var LoginForms = require('./LoginSignUpForms');
+var DBServiceCalls = require('../services/DBserviceCalls');
 
 var LoginPage= React.createClass({
     getInitialState: function(){
@@ -25,6 +26,11 @@ var LoginPage= React.createClass({
         }
         };
     },
+    saveUser: function(event){
+        event.preventDefault();
+        DBServiceCalls.SaveNewUser(this.state.user);
+
+    },
     setUserState: function(event){
         this.state.user[event.target.name]=event.target.value;
         return this.setState({user:this.state.user})
@@ -38,6 +44,7 @@ var LoginPage= React.createClass({
                 <LoginForms
                     user={this.state.user}
                     onChange={this.setUserState}
+                    onSave = {this.saveUser}
                 />
             </div>
         );
