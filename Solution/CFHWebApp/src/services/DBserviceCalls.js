@@ -26,17 +26,6 @@ var userApi = {
         //pretend an ajax call to web api is made here
         console.log('Pretend this just saved the author to the DB via AJAX call...');
         console.log(author);
-/*
-        if (author.id) {
-            var existingAuthorIndex = _.indexOf(authors, _.find(authors, {id: author.id}));
-            authors.splice(existingAuthorIndex, 1, author);
-        } else {
-            //Just simulating creation here.
-            //The server would generate ids for new authors in a real app.
-            //Cloning so copy returned is passed by value rather than by reference.
-            author.id = _generateId(author);
-            authors.push(author);
-        }*/
 
         return _clone(author);
     },
