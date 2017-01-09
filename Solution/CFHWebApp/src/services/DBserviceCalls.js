@@ -1,39 +1,40 @@
+/**
+ * Created by amynam on 1/9/2017.
+ */
 "use strict";
+var Request = require('request');
 
-//This file is mocking a web API by hitting hard coded data.
-var _ = require('lodash');
+var Headers = {
+    'User-Agent':       'Super Agent/0.0.1',
+    'Content-Type':     'application/x-www-form-urlencoded'
+}
 
-//This would be performed on the server in a real app. Just stubbing in.
-var _generateId = function(author) {
-    return author.firstName.toLowerCase() + '-' + author.lastName.toLowerCase();
+/*var NewUserDBSaveOptions = {
+    url:'http://localhost:8080/savenewuser',
+    method:'POST',
+    headers: Headers,
+    form:newUser
+}*/
+var getNewUserDBSaveOptions = function(newuser){
+
+    var NewUserDBSaveOptions = {
+        url:'http://localhost:8080/savenewuser',
+        method:'POST',
+        headers: Headers,
+        form:newuser}
+    return(NewUserDBSaveOptions);
+
 };
 
-var _clone = function(item) {
-    return JSON.parse(JSON.stringify(item)); //return cloned copy so that the item is passed by value instead of by reference
-};
-
-var userApi = {
-    getAllAuthors: function() {
-        return _clone(authors);
-    },
-
-    getAuthorById: function(id) {
-        var author = _.find(authors, {id: id});
-        return _clone(author);
-    },
-
-    SaveNewUser: function(author) {
-        //pretend an ajax call to web api is made here
-        console.log('Pretend this just saved the author to the DB via AJAX call...');
-        console.log(author);
-
-        return _clone(author);
-    },
-
-    deleteAuthor: function(id) {
-        console.log('Pretend this just deleted the author from the DB via an AJAX call...');
-        _.remove(authors, { id: id});
+var ServiceApis  = {
+    SaveNewUser: function (newuser) {
+        var NewUserDBSaveOptions = getNewUserDBSaveOptions(newuser);
+        Request(NewUserDBSaveOptions, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                // Print out the response body
+                console.log(body)
+            }
+        })
     }
-};
-
-module.exports = userApi;
+}
+module.exports=ServiceApis;

@@ -11,13 +11,14 @@ func LogError(message string){
 	var ErrorPath = "C:/Users/abhis/OneDrive/Documents/GitHub/CareFreeHomeLogs/CFHErrorLog" +today+".txt"
 	createFile(ErrorPath)
 	writeFile(ErrorPath, message)
+
 }
 
 func LogProcess(message string){
 	var LogProcessActive = "False"
 	if(LogProcessActive =="True") {
 		var today = time.Now().Format("01-02-2006")
-		var ProcessLogPath = "C:/Users/abhis/OneDrive/Documents/GitHub/CareFreeHomeLogs/CFHProcessLog" + today + ".txt"
+		var ProcessLogPath = "C:/Users/amynam/Desktop/CFHLogs/CFHProcessLog" + today + ".txt"
 		createFile(ProcessLogPath)
 		writeFile(ProcessLogPath, message)
 	}
@@ -33,9 +34,10 @@ func checkError(err error) {
 func createFile(path string) {
 	var _, err = os.Stat(path)
 	if os.IsNotExist(err) {
-		var file, err = os.Create(path)
+		var  file,err = os.Create(path)
 		checkError(err)
 		defer file.Close()
+
 	}
 }
 
