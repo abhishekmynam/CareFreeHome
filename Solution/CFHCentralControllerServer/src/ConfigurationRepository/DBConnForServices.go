@@ -12,9 +12,9 @@ func SaveUser (newUser User ){
 	}
 	defer session.Close()
 	userColl := session.DB("CFHCentralDBTest").C("UserMaster")
-	err = userColl.Insert(&User{newUser.usrFName, newUser.usrLName,
-		newUser.email, newUser.pwdConfirm, newUser.ph_no, newUser.address,
-		newUser.city, newUser.zipcode, newUser.state, newUser.country})
+	err = userColl.Insert(&User{usrFName: newUser.usrFName, usrLName:newUser.usrLName,
+		email:newUser.email, pwdConfirm:newUser.pwdConfirm, ph_no: newUser.ph_no, address:newUser.address,
+		city:newUser.city, zipcode:newUser.zipcode, state:newUser.state, country:newUser.country})
 	if err!=nil{
 		log.Fatal(err)
 	}

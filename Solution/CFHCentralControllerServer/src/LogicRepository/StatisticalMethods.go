@@ -51,3 +51,24 @@ func GetOutliers( dataList []float64)[]float64{
 	return listOutliers;
 }
 
+func GetMode(numbers []float64) (modes []float64) {
+	frequencies := make(map[float64]int, len(numbers))
+	highestFrequency := 0
+	for _, x := range numbers {
+		frequencies[x]++
+		if frequencies[x] > highestFrequency {
+			highestFrequency = frequencies[x]
+		}
+	}
+	for x, frequency := range frequencies {
+		if frequency == highestFrequency {
+			modes = append(modes, x)
+		}
+	}
+	if highestFrequency == 1 || len(modes) == len(numbers) {
+		modes = modes[:0] // Or: modes = []float64{}
+	}
+	sort.Float64s(modes)
+	return modes
+}
+
