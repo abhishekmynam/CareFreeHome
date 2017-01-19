@@ -1,6 +1,9 @@
 package LogicRepository
 
-import "sort"
+import (
+	"sort"
+	"math"
+)
 
 func GetOutliers( dataList []float64)[]float64{
 	listOutliers:= []float64{}
@@ -72,3 +75,23 @@ func GetMode(numbers []float64) (modes []float64) {
 	return modes
 }
 
+func GetStdDev(numbers []float64) float64 {
+	total := 0.0
+	for _, number := range numbers {
+		total += math.Pow(number-GetMean(numbers), 2)
+	}
+	variance := total / float64(len(numbers)-1)
+	return math.Sqrt(variance)
+}
+
+func GetMean(numbers []float64)float64{
+	mean := SumOfSliceElements(numbers) / float64(len(numbers))
+	return mean
+}
+
+func SumOfSliceElements(numbers []float64) (total float64) {
+	for _, x := range numbers {
+		total += x
+	}
+	return total
+}

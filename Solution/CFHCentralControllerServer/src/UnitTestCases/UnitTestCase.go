@@ -10,7 +10,8 @@ import (
 func main() {
 	//getOutliers()
 	//errorLogFileCheck()
-	getMode()
+	//getMode()
+	getStdDev()
 }
 
 func getOutliers(){
@@ -23,6 +24,12 @@ func getMode(){
 	DataList := []float64{3, 5, 3, 11, 6, 7, 4, 6, 9, 0, 4, 5, 21, 22, 23, -12, -13}
 	mode :=LogicRepository.GetMode(DataList)
 	fmt.Println(mode)
+}
+
+func getStdDev(){
+	DataList := []float64{3, 5, 3, 11, 6, 7, 4, 6, 9, 0, 4, 5, 21, 22, 23, -12, -13, 12, 120}
+	StdDev :=LogicRepository.GetStdDev(DataList)
+	fmt.Println(StdDev)
 }
 
 func errorLogFileCheck(){
