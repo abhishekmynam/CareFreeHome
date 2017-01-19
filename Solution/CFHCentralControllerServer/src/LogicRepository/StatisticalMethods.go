@@ -76,12 +76,18 @@ func GetMode(numbers []float64) (modes []float64) {
 }
 
 func GetStdDev(numbers []float64) float64 {
+
+	variance := GetVariance(numbers) / float64(len(numbers)-1)
+	return math.Sqrt(variance)
+}
+
+func GetVariance(numbers []float64) float64 {
 	total := 0.0
 	for _, number := range numbers {
 		total += math.Pow(number-GetMean(numbers), 2)
 	}
 	variance := total / float64(len(numbers)-1)
-	return math.Sqrt(variance)
+	return variance
 }
 
 func GetMean(numbers []float64)float64{
