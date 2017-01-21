@@ -20,3 +20,53 @@ type User struct {
 	CreatedDate time.Time
 	LastUpdated time.Time
 }
+
+type ControllingVals struct{
+	TempInside float64
+	LightsInside float64
+	MusicInside float64
+}
+
+type ControllingPpl struct {
+	PplCount int64
+	InsideControlVal []ControllingVals
+}
+
+type ControllingMusic struct {
+	MusicLevel float64
+	InsideControlPpl []ControllingPpl
+}
+
+type ControllingLights struct {
+	OutsideLight float64
+	InsideControlMusic []ControllingMusic
+}
+
+type ControllingTemp struct{
+	OutsideTemp float64
+	OutsideControlLight []ControllingLights
+}
+
+type AreaZip struct{
+	ZipCode int64
+	OutsideControlTemp []ControllingTemp
+}
+
+type RecordTime struct {
+	TimeRecord float64
+	AreaZipToRecord []AreaZip
+}
+
+type RecordDateOfMonth struct {
+	DateRecord int64
+	ControlTime []RecordTime
+}
+
+type RecordMonth struct{
+	MonthRecord string
+	ControlMonth []RecordDateOfMonth
+}
+
+	CondOutRecord string
+	ControlCond []RecordMonth
+}

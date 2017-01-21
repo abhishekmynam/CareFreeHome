@@ -23,13 +23,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DataInsertToDB.go" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DataInsertToDB.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FunctionalRepository/DataInsertToDB.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
               <caret line="23" column="143" selection-start-line="23" selection-start-column="143" selection-end-line="23" selection-end-column="143" />
               <folding>
                 <element signature="e#30#128#0" expanded="true" />
+                <marker date="1485022248891" expanded="true" signature="526:854" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -73,16 +74,19 @@
               <caret line="25" column="143" selection-start-line="25" selection-start-column="143" selection-end-line="25" selection-end-column="143" />
               <folding>
                 <element signature="e#30#128#0" expanded="true" />
+                <marker date="1485022233143" expanded="true" signature="504:569" ph="{...}" />
+                <marker date="1485022233143" expanded="true" signature="604:1022" ph="{...}" />
+                <marker date="1485022233143" expanded="true" signature="668:973" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CFHDataTypes.go" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CFHDataTypes.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ConfigurationRepository/CFHDataTypes.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
+            <state relative-caret-position="324">
+              <caret line="69" column="10" selection-start-line="69" selection-start-column="10" selection-end-line="69" selection-end-column="10" />
               <folding>
                 <element signature="e#33#46#0" expanded="true" />
               </folding>
@@ -138,10 +142,10 @@
         <option value="$PROJECT_DIR$/src/FunctionalRepository/StatisticalMethods.go" />
         <option value="$PROJECT_DIR$/src/FunctionalRepository/RemoveDataFromDB.go" />
         <option value="$PROJECT_DIR$/src/FunctionalRepository/DataRemoveFromDB.go" />
-        <option value="$PROJECT_DIR$/src/ConfigurationRepository/CFHDataTypes.go" />
         <option value="$PROJECT_DIR$/src/UnitTestCases/UnitTestCase.go" />
         <option value="$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB.go" />
         <option value="$PROJECT_DIR$/src/FunctionalRepository/DataInsertToDB.go" />
+        <option value="$PROJECT_DIR$/src/ConfigurationRepository/CFHDataTypes.go" />
       </list>
     </option>
   </component>
@@ -889,12 +893,12 @@
       <workItem from="1484916774054" duration="599000" />
       <workItem from="1484938296280" duration="6423000" />
       <workItem from="1484946085912" duration="2364000" />
-      <workItem from="1485015314371" duration="6988000" />
+      <workItem from="1485015314371" duration="10061000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60322000" />
+    <option name="totallyTimeSpent" value="63395000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="834" extended-state="6" />
@@ -1334,22 +1338,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ConfigurationRepository/CFHDataTypes.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
-          <folding>
-            <element signature="e#33#46#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="25" column="143" selection-start-line="25" selection-start-column="143" selection-end-line="25" selection-end-column="143" />
           <folding>
             <element signature="e#30#128#0" expanded="true" />
+            <marker date="1485022233143" expanded="true" signature="504:569" ph="{...}" />
+            <marker date="1485022233143" expanded="true" signature="604:1022" ph="{...}" />
+            <marker date="1485022233143" expanded="true" signature="668:973" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1360,6 +1357,17 @@
           <caret line="23" column="143" selection-start-line="23" selection-start-column="143" selection-end-line="23" selection-end-column="143" />
           <folding>
             <element signature="e#30#128#0" expanded="true" />
+            <marker date="1485022248891" expanded="true" signature="526:854" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ConfigurationRepository/CFHDataTypes.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="69" column="10" selection-start-line="69" selection-start-column="10" selection-end-line="69" selection-end-column="10" />
+          <folding>
+            <element signature="e#33#46#0" expanded="true" />
           </folding>
         </state>
       </provider>
