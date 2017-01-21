@@ -1,5 +1,6 @@
 package ConfigurationRepository
 
+import "time"
 
 type User struct {
 	User_name string
@@ -15,4 +16,7 @@ type User struct {
 	Zipcode int64
 	State string
 	Country string
+	UserStatus int
+	CreatedDate time.Time
+	LastUpdated time.Time
 }

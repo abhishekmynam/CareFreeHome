@@ -1,4 +1,4 @@
-package LogicRepository
+package FunctionalRepository
 
 import (
 	"sort"
