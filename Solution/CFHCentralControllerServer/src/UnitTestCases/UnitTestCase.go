@@ -14,7 +14,8 @@ func main() {
 	//getStdDev()
 	//saveUser()
 	//removeUser()
-	updateUser()
+	//updateUser()
+	insertGenData()
 
 }
 
@@ -72,6 +73,16 @@ func updateUser(){
 	thisUser.City="Maywood1"
 	thisUser.Zipcode=07646
 	thisUser.State = "NJ"
-	activeUser:= FunctionalRepository.UpdateUser(thisUser,1)
+	activeUser:= FunctionalRepository.UpdateUser(thisUser)
 	fmt.Println(activeUser)
+}
+
+func insertGenData(){
+	/*tempInside float64 , lightInside float64,
+		musicInside float64, pplCount int64, musicLevel float64,
+		outLight float64, outTemp float64, zipCode int64, recTime float64,
+		recDate int64, recMonth string, conditionOut string */
+	thisObj:= FunctionalRepository.GetUnProGenDataColObj(12,15,13,14,16,9,5,8,6,1,"jan","ice")
+	thisStatus := FunctionalRepository.UpdateGenControlData(thisObj)
+	fmt.Println(thisStatus)
 }

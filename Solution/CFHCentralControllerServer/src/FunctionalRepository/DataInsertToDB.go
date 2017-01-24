@@ -10,12 +10,12 @@ import (
 
 func SaveUser (newUser CR.User ) string {
 	var saveUserStat string
-	session, err:= mgo.Dial(CR.DBServerTest)
+	session, err:= mgo.Dial(CR.DBserver)
 	if err!= nil{
 		panic(err)
 	}
 	defer session.Close()
-	userColl := session.DB(CR.DBInstanceTest).C(CR.UserMasterCollection)
+	userColl := session.DB(CR.DBInstance).C(CR.UserMasterCollection)
 	var existingUser CR.User
 	err = userColl.Find(bson.M{"email":newUser.Email}).One(&existingUser)
 	if (len(existingUser.Email)==0){
@@ -31,5 +31,21 @@ func SaveUser (newUser CR.User ) string {
 		saveUserStat ="error occured check the logs"
 	}
 	return saveUserStat
+}
+
+func SaveNewOutCondition (newUnProGenDataCol CR.UnProGenDataCol)string{
+	var saveNewConditionOutStatus string
+	session, err:= mgo.Dial(CR.DBserver)
+	if err!= nil{
+		panic(err)
+	}
+	defer session.Close()
+	ctrlColl := session.DB(CR.DBInstance).C(CR.GlobalCtrlVals)
+	var existingCondition CR.UnProGenDataCol
+	err = ctrlColl.Find(bson.M{"condoutrecord":newUnProGenDataCol.CondOutRecord}).One(&existingCondition)
+	if(len(existingCondition.CondOutRecord)==0){
+		err = ctrlColl.Insert(newUnProGenDataCol)
+	}
+	return saveNewConditionOutStatus
 }
 

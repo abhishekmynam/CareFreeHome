@@ -9,12 +9,12 @@ import (
 
 func RemoveUser(email string) string{
 	var removeUserStat string
-	session, err:= mgo.Dial(CR.DBServerTest)
+	session, err:= mgo.Dial(CR.DBserver)
 	if err!= nil{
 		panic(err)
 	}
 	defer session.Close()
-	userColl := session.DB(CR.DBInstanceTest).C(CR.UserMasterCollection)
+	userColl := session.DB(CR.DBInstance).C(CR.UserMasterCollection)
 	var existingUser CR.User
 	err = userColl.Find(bson.M{"email":email}).One(&existingUser)
 	if (len(existingUser.Email)==0){
