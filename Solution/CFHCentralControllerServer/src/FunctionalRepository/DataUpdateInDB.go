@@ -6,7 +6,6 @@ import (
 	CR "ConfigurationRepository"
 	"gopkg.in/mgo.v2/bson"
 	"time"
-	"fmt"
 )
 
 func UpdateUser (newUser CR.User) string {
@@ -51,7 +50,7 @@ func UpdateGenControlData (updateData CR.GlobalCtrlData)string{
 	var ctrlngValsObj,ctrlngValObj CR.ControllingVals
 	var ctrldValsObj, ctrldValObj CR.ControlledVals
 	var maxId string
-
+	updateCtrlData = "Successfully created data"
 	locColl.Find(bson.M{"zipcode":updateData.Loc.Zipcode, "country":updateData.Loc.Country}).Select(bson.M{"zipcode":1,"locid":1}).One(&locObj)
 
 	if(len(locObj.Zipcode)==0){
@@ -75,19 +74,19 @@ func UpdateGenControlData (updateData CR.GlobalCtrlData)string{
 		updateData.CtrldVals.CtrlValsId = updateData.CtrlgVals.CtrlingVals[0].CtrlValsId
 		err = locColl.Insert(updateData.Loc)
 		if err!= nil{
-			panic(err)
+			return "failed creating data"
 		}
 		err = dtimeColl.Insert(updateData.Conddate)
 		if err!= nil{
-			panic(err)
+			return "failed creating data"
 		}
 		err = ctrlgValsColl.Insert(updateData.CtrlgVals)
 		if err!= nil{
-			panic(err)
+			return "failed creating data"
 		}
 		err = ctrldValsColl.Insert(updateData.CtrldVals)
 		if err!= nil{
-			panic(err)
+			return "failed creating data"
 		}
 	}else{
 		updateData.Loc.LocId = locObj.LocId
@@ -110,15 +109,15 @@ func UpdateGenControlData (updateData CR.GlobalCtrlData)string{
 			updateData.CtrldVals.CtrlValsId = updateData.CtrlgVals.CtrlingVals[0].CtrlValsId
 			err = dtimeColl.Insert(updateData.Conddate)
 			if err!= nil{
-				panic(err)
+				return "failed creating data"
 			}
 			err = ctrlgValsColl.Insert(updateData.CtrlgVals)
 			if err!= nil{
-				panic(err)
+				return "failed creating data"
 			}
 			err = ctrldValsColl.Insert(updateData.CtrldVals)
 			if err!= nil{
-				panic(err)
+				return "failed creating data"
 			}
 		}else{
 			updateData.Conddate.CondDateId = dtimeObj.CondDateId
@@ -154,11 +153,11 @@ func UpdateGenControlData (updateData CR.GlobalCtrlData)string{
 				err = ctrlgValsColl.Update(bson.M{"conddateid":updateData.Conddate.CondDateId},
 					bson.M{"$push":bson.M{"ctrlingvals":updateData.CtrlgVals.CtrlingVals[0]}})
 				if err!= nil{
-					panic(err)
+					return "failed creating data"
 				}
 				err = ctrldValsColl.Insert(updateData.CtrldVals)
 				if err!= nil{
-					panic(err)
+					return "failed creating data"
 				}
 			}else{
 				var controllingId string
@@ -191,14 +190,13 @@ func UpdateGenControlData (updateData CR.GlobalCtrlData)string{
 					err = ctrldValsColl.Update(bson.M{"ctrlvalsid":updateData.CtrlgVals.CtrlingVals[0].CtrlValsId},
 						bson.M{"$push":bson.M{"ctrledvals":updateData.CtrldVals.CtrledVals[0]}})
 					if err!= nil {
-						panic(err)
+						return "failed creating data"
 					}
 				}
 			}
 
 		}
 	}
-	fmt.Println(locObj)
 
 	return updateCtrlData
 }
