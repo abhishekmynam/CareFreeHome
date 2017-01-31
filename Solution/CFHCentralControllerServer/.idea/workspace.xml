@@ -17,39 +17,55 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+            <file leaf-file-name="CareFreeHome/CFHCentralDBTest/Location" pinned="false" current-in-tab="false">
+              <entry file="mongo://CareFreeHome/CFHCentralDBTest/Location">
+                <provider selected="true" editor-type-id="MongoData">
+                  <state />
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="CareFreeHome/CFHCentralDBTest/CondDate" pinned="false" current-in-tab="false">
+              <entry file="mongo://CareFreeHome/CFHCentralDBTest/CondDate">
+                <provider selected="true" editor-type-id="MongoData">
+                  <state />
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="CareFreeHome/CFHCentralDBTest/ControllingVals" pinned="false" current-in-tab="false">
+              <entry file="mongo://CareFreeHome/CFHCentralDBTest/ControllingVals">
+                <provider selected="true" editor-type-id="MongoData">
+                  <state />
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="CareFreeHome/CFHCentralDBTest/ControlledVals" pinned="false" current-in-tab="true">
+              <entry file="mongo://CareFreeHome/CFHCentralDBTest/ControlledVals">
+                <provider selected="true" editor-type-id="MongoData">
+                  <state />
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="CFHCentralControllerServer" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DataInsertToDB.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FunctionalRepository/DataInsertToDB.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="47" column="9" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
-              <folding>
-                <element signature="e#30#128#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataRemoveFromDB.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FunctionalRepository/DataRemoveFromDB.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="UnitTestCase.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/UnitTestCases/UnitTestCase.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="84" column="76" selection-start-line="84" selection-start-column="76" selection-end-line="84" selection-end-column="76" />
+            <state relative-caret-position="415">
+              <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
               <folding>
                 <element signature="e#14#90#0" expanded="true" />
               </folding>
@@ -57,53 +73,56 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CFHDataTypes.go" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ConfigurationRepository/CFHDataTypes.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="20" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="20" />
-              <folding>
-                <element signature="e#33#46#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BaseService.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ServiceRepository/BaseService.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="26" column="38" selection-start-line="26" selection-start-column="38" selection-end-line="26" selection-end-column="38" />
-              <folding>
-                <element signature="e#14#77#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CareFreeHome/CFHCentralDBTest/GlobalCtrlVals" pinned="false" current-in-tab="false">
-        <entry file="mongo://CareFreeHome/CFHCentralDBTest/GlobalCtrlVals">
-          <provider selected="true" editor-type-id="MongoData">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataUpdateInDB.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3117">
-              <caret line="227" column="0" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SupportFuncs.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FunctionalRepository/SupportFuncs.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="62" selection-start-line="10" selection-start-column="62" selection-end-line="10" selection-end-column="62" />
+            <state relative-caret-position="255">
+              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataUpdateInDB.go" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="189" column="100" selection-start-line="189" selection-start-column="100" selection-end-line="189" selection-end-column="100" />
+              <folding>
+                <element signature="e#30#135#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CFHDataTypes.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ConfigurationRepository/CFHDataTypes.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="117">
+              <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="panic.go" pinned="false" current-in-tab="false">
+        <entry file="file://C:/Go/src/runtime/panic.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="9163">
+              <caret line="542" column="0" selection-start-line="542" selection-start-column="0" selection-end-line="542" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataUpdateInDB_b4DBStrctChng.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB_b4DBStrctChng.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="935">
+              <caret line="62" column="99" selection-start-line="62" selection-start-column="32" selection-end-line="62" selection-end-column="99" />
+              <folding>
+                <element signature="e#30#137#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -154,13 +173,14 @@
         <option value="$PROJECT_DIR$/src/LogicRepository/DataInsertToDB.go" />
         <option value="$PROJECT_DIR$/src/FunctionalRepository/StatisticalMethods.go" />
         <option value="$PROJECT_DIR$/src/FunctionalRepository/RemoveDataFromDB.go" />
-        <option value="$PROJECT_DIR$/src/ConfigurationRepository/DBConnForServices.go" />
         <option value="$PROJECT_DIR$/src/FunctionalRepository/DataRemoveFromDB.go" />
         <option value="$PROJECT_DIR$/src/FunctionalRepository/DataInsertToDB.go" />
+        <option value="$PROJECT_DIR$/src/ConfigurationRepository/DBConnForServices.go" />
+        <option value="$PROJECT_DIR$/src/ConfigurationRepository/CFHDataTypes.go" />
+        <option value="$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB_b4DBStrctChng.go" />
+        <option value="$PROJECT_DIR$/src/FunctionalRepository/SupportFuncs.go" />
         <option value="$PROJECT_DIR$/src/UnitTestCases/UnitTestCase.go" />
         <option value="$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB.go" />
-        <option value="$PROJECT_DIR$/src/ConfigurationRepository/CFHDataTypes.go" />
-        <option value="$PROJECT_DIR$/src/FunctionalRepository/SupportFuncs.go" />
       </list>
     </option>
   </component>
@@ -181,10 +201,10 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1272" />
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1096" />
+    <option name="width" value="1696" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -211,7 +231,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -322,8 +341,9 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -417,7 +437,10 @@
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
-      <method />
+      <method>
+        <option name="Make" enabled="true" />
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
@@ -440,7 +463,10 @@
       <Profilers>
         <option name="GAPID_DISABLE_PCS" value="false" />
       </Profilers>
-      <method />
+      <method>
+        <option name="Make" enabled="true" />
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
@@ -915,15 +941,24 @@
       <workItem from="1485015314371" duration="10061000" />
       <workItem from="1485046179955" duration="18801000" />
       <workItem from="1485211897881" duration="8110000" />
-      <workItem from="1485271917890" duration="15134000" />
+      <workItem from="1485271917890" duration="15187000" />
+      <workItem from="1485343276507" duration="2365000" />
+      <workItem from="1485353311332" duration="10016000" />
+      <workItem from="1485390039883" duration="6841000" />
+      <workItem from="1485440377635" duration="1245000" />
+      <workItem from="1485456209867" duration="6999000" />
+      <workItem from="1485544805669" duration="5711000" />
+      <workItem from="1485562236702" duration="32111000" />
+      <workItem from="1485785621115" duration="10894000" />
+      <workItem from="1485875154558" duration="10640000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105440000" />
+    <option name="totallyTimeSpent" value="192315000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1272" y="-8" width="1936" height="1096" extended-state="6" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -932,18 +967,18 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950193" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23882504" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23687753" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.32890624" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="97" y="105" width="655" height="575" />
+      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.32890624" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="772" y="192" width="655" height="575" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11666667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12261905" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31464174" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3594625" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1000,16 +1035,6 @@
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB.go</url>
-          <line>21</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/src/UnitTestCases/UnitTestCase.go</url>
-          <line>86</line>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataInsertToDB.go</url>
           <line>45</line>
           <option name="timeStamp" value="38" />
@@ -1021,33 +1046,100 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/src/ConfigurationRepository/CFHDataTypes.go</url>
-          <line>70</line>
+          <line>15</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB.go</url>
-          <line>154</line>
-          <properties />
+          <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB_b4DBStrctChng.go</url>
+          <line>159</line>
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB.go</url>
-          <line>179</line>
-          <properties />
+          <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB_b4DBStrctChng.go</url>
+          <line>184</line>
           <option name="timeStamp" value="66" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB.go</url>
-          <line>207</line>
-          <properties />
+          <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB_b4DBStrctChng.go</url>
+          <line>212</line>
           <option name="timeStamp" value="68" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB_b4DBStrctChng.go</url>
+          <line>73</line>
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB_b4DBStrctChng.go</url>
+          <line>93</line>
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB_b4DBStrctChng.go</url>
+          <line>88</line>
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB_b4DBStrctChng.go</url>
+          <line>228</line>
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB_b4DBStrctChng.go</url>
+          <line>87</line>
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/UnitTestCases/UnitTestCase.go</url>
+          <line>89</line>
+          <option name="timeStamp" value="88" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/UnitTestCases/UnitTestCase.go</url>
+          <line>95</line>
+          <option name="timeStamp" value="96" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB.go</url>
+          <line>200</line>
+          <option name="timeStamp" value="118" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB.go</url>
+          <line>95</line>
+          <option name="timeStamp" value="136" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB.go</url>
+          <line>56</line>
+          <properties />
+          <option name="timeStamp" value="137" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB.go</url>
+          <line>174</line>
+          <properties />
+          <option name="timeStamp" value="139" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB.go</url>
+          <line>180</line>
+          <properties />
+          <option name="timeStamp" value="140" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB.go</url>
+          <line>192</line>
+          <properties />
+          <option name="timeStamp" value="143" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="69" />
+      <option name="time" value="144" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="GoApplicationRunConfiguration">
-        <watch expression="existingInPpl.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideControlLight.InsideControlMusic.InsideControlPpl.PplCount" />
+        <watch expression="controllingId" />
+        <watch expression="maxId" />
       </configuration>
     </watches-manager>
   </component>
@@ -1056,16 +1148,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ConfigurationRepository/LogFileCreator.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="32" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
-          <folding>
-            <element signature="e#33#64#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/UnitTestCases/UnitTestCase.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -1078,7 +1160,7 @@
         <state relative-caret-position="187">
           <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
           <folding>
-            <element signature="e#14#77#0" expanded="true" />
+            <element signature="e#14#77#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1112,7 +1194,7 @@
         <state relative-caret-position="153">
           <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
           <folding>
-            <element signature="e#14#77#0" expanded="true" />
+            <element signature="e#14#77#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1143,7 +1225,7 @@
         <state relative-caret-position="153">
           <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
           <folding>
-            <element signature="e#14#77#0" expanded="true" />
+            <element signature="e#14#77#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1173,13 +1255,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
           <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Go/src/runtime/asm_amd64.s">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="478" column="0" selection-start-line="478" selection-start-column="0" selection-end-line="478" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1323,41 +1398,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Go/src/runtime/iface.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="275" column="0" selection-start-line="275" selection-start-column="0" selection-end-line="275" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ConfigurationRepository/DBConnForServices.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FunctionalRepository/StatisticalMethods.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Go/src/runtime/hashmap.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="189" column="0" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Go/src/runtime/panic.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="540" column="0" selection-start-line="540" selection-start-column="0" selection-end-line="540" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1366,17 +1410,7 @@
         <state relative-caret-position="289">
           <caret line="26" column="38" selection-start-line="26" selection-start-column="38" selection-end-line="26" selection-end-column="38" />
           <folding>
-            <element signature="e#14#77#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/UnitTestCases/UnitTestCase.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="84" column="76" selection-start-line="84" selection-start-column="76" selection-end-line="84" selection-end-column="76" />
-          <folding>
-            <element signature="e#14#90#0" expanded="true" />
+            <element signature="e#14#77#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1389,38 +1423,96 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/FunctionalRepository/StatisticalMethods.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Go/src/runtime/iface.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="275" column="0" selection-start-line="275" selection-start-column="0" selection-end-line="275" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ConfigurationRepository/DBConnForServices.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="16" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/FunctionalRepository/DataInsertToDB.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="47" column="9" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
+        <state relative-caret-position="42">
+          <caret line="26" column="43" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
           <folding>
-            <element signature="e#30#128#0" expanded="true" />
+            <element signature="e#30#128#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FunctionalRepository/SupportFuncs.go">
+    <entry file="file://C:/Go/src/runtime/asm_amd64.s">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="62" selection-start-line="10" selection-start-column="62" selection-end-line="10" selection-end-column="62" />
+        <state relative-caret-position="147">
+          <caret line="2085" column="0" selection-start-line="2085" selection-start-column="0" selection-end-line="2085" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB.go">
+    <entry file="file://C:/Go/src/runtime/panic.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3117">
-          <caret line="227" column="0" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
+        <state relative-caret-position="9163">
+          <caret line="542" column="0" selection-start-line="542" selection-start-column="0" selection-end-line="542" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB_b4DBStrctChng.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="935">
+          <caret line="62" column="99" selection-start-line="62" selection-start-column="32" selection-end-line="62" selection-end-column="99" />
+          <folding>
+            <element signature="e#30#137#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ConfigurationRepository/CFHDataTypes.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="20" />
+        <state relative-caret-position="117">
+          <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FunctionalRepository/SupportFuncs.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UnitTestCases/UnitTestCase.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
           <folding>
-            <element signature="e#33#46#0" expanded="true" />
+            <element signature="e#14#90#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FunctionalRepository/DataUpdateInDB.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="189" column="100" selection-start-line="189" selection-start-column="100" selection-end-line="189" selection-end-column="100" />
+          <folding>
+            <element signature="e#30#135#0" expanded="true" />
           </folding>
         </state>
       </provider>

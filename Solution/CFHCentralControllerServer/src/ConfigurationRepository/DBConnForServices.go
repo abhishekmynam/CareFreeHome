@@ -7,7 +7,11 @@ var DBInstanceTest = "CFHCentralDBTest"
 
 
 var UserMasterCollection= "UserMaster"
-var GlobalCtrlVals = "GlobalCtrlVals"
+var GlblCtrlDataColl = "GlobalCtrlData"
+var ControlledValsColl = "ControlledVals"
+var ControllingValsColl = "ControllingVals"
+var CondDateColl = "CondDate"
+var LocColl = "Location"
 
 
 var DBserver = DBServerTest

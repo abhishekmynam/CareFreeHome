@@ -21,55 +21,48 @@ type User struct {
 	LastUpdated time.Time
 }
 
+type Location struct{
+	LocId string
+	Zipcode string
+	Country string
+}
+
+type CondDate struct{
+	CondDateId string
+	LocId string
+	Dtime string
+	Working bool
+}
+
 type ControllingVals struct{
-	TempInside float64
-	LightsInside float64
-	MusicInside float64
-	CountOfhomes int64
+	CondDateId string
+	CtrlingVals []OutsideVals
 }
 
-type ControllingPpl struct {
-	PplCount int64
-	InsideControlVal ControllingVals
+type OutsideVals struct{
+	CtrlValsId string
+	CondOut string
+	TempOut float64
+	LightOut float64
+	PplIn int64
 }
 
-type ControllingMusic struct {
-	MusicLevel float64
-	InsideControlPpl ControllingPpl
+type ControlledVals struct{
+	CtrlValsId string
+	CtrledVals []InsideVals
 }
 
-type ControllingLights struct {
-	OutsideLight float64
-	InsideControlMusic ControllingMusic
+type InsideVals struct{
+	CtrldValId string
+	TempIn float64
+	LightIn float64
+	MusicIn float64
+	HomesCount int64
 }
 
-type ControllingTemp struct{
-	OutsideTemp float64
-	OutsideControlLight ControllingLights
+type GlobalCtrlData struct{
+	Loc Location
+	Conddate CondDate
+	CtrlgVals ControllingVals
+	CtrldVals ControlledVals
 }
-
-type AreaZip struct{
-	ZipCode int64
-	OutsideControlTemp ControllingTemp
-}
-
-type RecordTime struct {
-	TimeRecord float64
-	AreaZipToRecord AreaZip
-}
-
-type RecordDateOfMonth struct {
-	DateRecord int64
-	ControlTime RecordTime
-}
-
-type RecordMonth struct{
-	MonthRecord string
-	ControlDate RecordDateOfMonth
-}
-
-type UnProGenDataCol struct{
-	CondOutRecord string
-	ControlMonth RecordMonth
-}
-

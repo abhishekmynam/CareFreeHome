@@ -32,7 +32,7 @@ func SaveUser (newUser CR.User ) string {
 	}
 	return saveUserStat
 }
-
+/*
 func SaveNewOutCondition (newUnProGenDataCol CR.UnProGenDataCol)string{
 	var saveNewConditionOutStatus string
 	session, err:= mgo.Dial(CR.DBserver)
@@ -49,3 +49,4 @@ func SaveNewOutCondition (newUnProGenDataCol CR.UnProGenDataCol)string{
 	return saveNewConditionOutStatus
 }
 
+*/

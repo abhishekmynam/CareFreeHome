@@ -34,194 +34,171 @@ func UpdateUser (newUser CR.User) string {
 	return DeactivateUserStatus
 }
 
-func UpdateGenControlData (updateData CR.UnProGenDataCol)string{
+func UpdateGenControlData (updateData CR.GlobalCtrlData)string{
 	var updateCtrlData string
 	session, err:= mgo.Dial(CR.DBserver)
 	if err!= nil{
 		panic(err)
 	}
 	defer session.Close()
-	ctrlColl := session.DB(CR.DBInstance).C(CR.GlobalCtrlVals)
+	locColl := session.DB(CR.DBInstance).C(CR.LocColl)
+	dtimeColl := session.DB(CR.DBInstance).C(CR.CondDateColl)
+	ctrlgValsColl := session.DB(CR.DBInstance).C(CR.ControllingValsColl)
+	ctrldValsColl := session.DB(CR.DBInstance).C(CR.ControlledValsColl)
 
-	var existingCond CR.UnProGenDataCol
-	ctrlColl.Find(bson.M{"condoutrecord":updateData.CondOutRecord}).Select(bson.M{"condoutrecord":1}).One(&existingCond)
-	if(len(existingCond.CondOutRecord)==0){
-		err = ctrlColl.Insert(updateData)
-	}else {
-		pipeline := []bson.M{
-			{"$match":bson.M{"condoutrecord":updateData.CondOutRecord}},
-			{"$unwind":"$controlmonth"},
-			{"$match":bson.M{"controlmonth.monthrecord":updateData.ControlMonth.MonthRecord}},
-			{"$project":bson.M{"controlmonth.monthrecord":1}},
+	var locObj CR.Location
+	var dtimeObj CR.CondDate
+	var ctrlngValsObj,ctrlngValObj CR.ControllingVals
+	var ctrldValsObj, ctrldValObj CR.ControlledVals
+	var maxId string
+
+	locColl.Find(bson.M{"zipcode":updateData.Loc.Zipcode, "country":updateData.Loc.Country}).Select(bson.M{"zipcode":1,"locid":1}).One(&locObj)
+
+	if(len(locObj.Zipcode)==0){
+		locColl.Find(bson.M{"locid":bson.M{"$ne":""}}).Select(
+			bson.M{"locid":1}).Sort("-locid").Limit(1).One(&locObj)
+		updateData.Loc.LocId = IDGen(locObj.LocId)
+
+		dtimeColl.Find(bson.M{"conddateid":bson.M{"$ne":""}}).Select(
+			bson.M{"conddateid":1}).Sort("-conddateid").Limit(1).One(&dtimeObj)
+		updateData.Conddate.CondDateId  = IDGen(dtimeObj.CondDateId)
+		updateData.Conddate.LocId = updateData.Loc.LocId
+
+		ctrlgValsColl.Find(bson.M{"ctrlingvals.ctrlsvalsid":bson.M{"$ne":""}}).Select(
+			bson.M{"ctrlingvals.ctrlvalsid":1}).Sort("-ctrlingvals.ctrlvalsid").Limit(1).One(&ctrlngValsObj)
+		updateData.CtrlgVals.CtrlingVals[0].CtrlValsId = IDGen(ctrlngValsObj.CtrlingVals[0].CtrlValsId)
+		updateData.CtrlgVals.CondDateId = updateData.Conddate.CondDateId
+
+		ctrldValsColl.Find(bson.M{"ctrledvals.ctrldvalid":bson.M{"$ne":""}}).Select(
+			bson.M{"ctrledvals.ctrldvalid":1}).Sort("-ctrledvals.ctrldvalid").Limit(1).One(&ctrldValsObj)
+		updateData.CtrldVals.CtrledVals[0].CtrldValId = IDGen(ctrldValsObj.CtrledVals[0].CtrldValId)
+		updateData.CtrldVals.CtrlValsId = updateData.CtrlgVals.CtrlingVals[0].CtrlValsId
+		err = locColl.Insert(updateData.Loc)
+		if err!= nil{
+			panic(err)
 		}
-		var existingMon CR.UnProGenDataCol
-		ctrlColl.Pipe(pipeline).One(&existingMon)
+		err = dtimeColl.Insert(updateData.Conddate)
+		if err!= nil{
+			panic(err)
+		}
+		err = ctrlgValsColl.Insert(updateData.CtrlgVals)
+		if err!= nil{
+			panic(err)
+		}
+		err = ctrldValsColl.Insert(updateData.CtrldVals)
+		if err!= nil{
+			panic(err)
+		}
+	}else{
+		updateData.Loc.LocId = locObj.LocId
+		dtimeColl.Find(bson.M{"dtime":updateData.Conddate.Dtime, "working":updateData.Conddate.Working, "locid":locObj.LocId}).Select(
+			bson.M{"dtime":1, "conddateid":1}).One(&dtimeObj )
+		if(len(dtimeObj.Dtime)==0){
+			dtimeColl.Find(bson.M{"conddateid":bson.M{"$ne":""}}).Select(
+				bson.M{"conddateid":1}).Sort("-conddateid").Limit(1).One(&dtimeObj)
+			updateData.Conddate.CondDateId  = IDGen(dtimeObj.CondDateId)
+			updateData.Conddate.LocId = updateData.Loc.LocId
 
-		if(len(existingMon.ControlMonth.MonthRecord)==0){
+			ctrlgValsColl.Find(bson.M{"ctrlingvals.ctrlsvalsid":bson.M{"$ne":""}}).Select(
+				bson.M{"ctrlingvals.ctrlvalsid":1}).Sort("-ctrlingvals.ctrlvalsid").Limit(1).One(&ctrlngValsObj)
+			updateData.CtrlgVals.CtrlingVals[0].CtrlValsId = IDGen(ctrlngValsObj.CtrlingVals[0].CtrlValsId)
+			updateData.CtrlgVals.CondDateId = updateData.Conddate.CondDateId
 
-		}else {
-			pipeline := []bson.M{
-				{"$match":bson.M{"condoutrecord":updateData.CondOutRecord}},
-				{"$unwind":"$controlmonth"},
-				{"$match":bson.M{"controlmonth.monthrecord":updateData.ControlMonth.MonthRecord}},
-				{"$unwind":"$controlmonth.controldate"},
-				{"$match":bson.M{"controlmonth.controldate.daterecord":updateData.ControlMonth.ControlDate.DateRecord}},
-				{"$project":bson.M{"controlmonth.controldate.daterecord":1}},
+			ctrldValsColl.Find(bson.M{"ctrledvals.ctrldvalid":bson.M{"$ne":""}}).Select(
+				bson.M{"ctrledvals.ctrldvalid":1}).Sort("-ctrledvals.ctrldvalid").Limit(1).One(&ctrldValsObj)
+			updateData.CtrldVals.CtrledVals[0].CtrldValId = IDGen(ctrldValsObj.CtrledVals[0].CtrldValId)
+			updateData.CtrldVals.CtrlValsId = updateData.CtrlgVals.CtrlingVals[0].CtrlValsId
+			err = dtimeColl.Insert(updateData.Conddate)
+			if err!= nil{
+				panic(err)
 			}
-			var existingDate CR.UnProGenDataCol
-			existingDate.ControlMonth.ControlDate.DateRecord = -999
-			ctrlColl.Pipe(pipeline).One(&existingDate)
+			err = ctrlgValsColl.Insert(updateData.CtrlgVals)
+			if err!= nil{
+				panic(err)
+			}
+			err = ctrldValsColl.Insert(updateData.CtrldVals)
+			if err!= nil{
+				panic(err)
+			}
+		}else{
+			updateData.Conddate.CondDateId = dtimeObj.CondDateId
+			ctrlgValsColl.Find(bson.M{"conddateid":dtimeObj.CondDateId,
+						  "ctrlingvals.condout":updateData.CtrlgVals.CtrlingVals[0].CondOut,
+					          "ctrlingvals.tempout":updateData.CtrlgVals.CtrlingVals[0].TempOut,
+				                  "ctrlingvals.lightout":updateData.CtrlgVals.CtrlingVals[0].LightOut,
+						  "ctrlingvals.pplin":updateData.CtrlgVals.CtrlingVals[0].PplIn}).Select(
+				bson.M{"ctrlingvals":1}).One(&ctrlngValsObj)
+			if(ctrlngValsObj.CtrlingVals == nil){
 
-			if(existingDate.ControlMonth.ControlDate.DateRecord ==-999 ){
-
-			}else {
-				pipeline := []bson.M{
-					{"$match":bson.M{"condoutrecord":updateData.CondOutRecord}},
-					{"$unwind":"$controlmonth"},
-					{"$match":bson.M{"controlmonth.monthrecord":updateData.ControlMonth.MonthRecord}},
-					{"$unwind":"$controlmonth.controldate"},
-					{"$match":bson.M{"controlmonth.controldate.daterecord":updateData.ControlMonth.ControlDate.DateRecord}},
-					{"$unwind":"$controlmonth.controldate.controltime"},
-					{"$match":bson.M{"controlmonth.controldate.controltime.timerecord":updateData.ControlMonth.ControlDate.ControlTime.TimeRecord}},
-					{"$project":bson.M{"controlmonth.controldate.controltime.timerecord":1}},
-				}
-				var existingTime CR.UnProGenDataCol
-				existingTime.ControlMonth.ControlDate.ControlTime.TimeRecord = -999
-				ctrlColl.Pipe(pipeline).One(&existingTime)
-
-				if(existingTime.ControlMonth.ControlDate.ControlTime.TimeRecord==-999){
-
-				}else{
-					pipeline := []bson.M{
-						{"$match":bson.M{"condoutrecord":updateData.CondOutRecord}},
-						{"$unwind":"$controlmonth"},
-						{"$match":bson.M{"controlmonth.monthrecord":updateData.ControlMonth.MonthRecord}},
-						{"$unwind":"$controlmonth.controldate"},
-						{"$match":bson.M{"controlmonth.controldate.daterecord":updateData.ControlMonth.ControlDate.DateRecord}},
-						{"$unwind":"$controlmonth.controldate.controltime"},
-						{"$match":bson.M{"controlmonth.controldate.controltime.timerecord":updateData.ControlMonth.ControlDate.ControlTime.TimeRecord}},
-						{"$unwind":"$controlmonth.controldate.controltime"},
-						{"$match":bson.M{"controlmonth.controldate.controltime.areaziptorecord.zipcode":updateData.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.ZipCode}},
-						{"$project":bson.M{"controlmonth.controldate.controltime.areaziptorecord.zipcode":1}},
+				//check from here
+				ctrlgValsColl.Find(bson.M{}).Select(
+					bson.M{"ctrlingvals.ctrlvalsid":1}).Sort("-ctrlingvals.ctrlvalsid").Limit(1).One(&ctrlngValObj)
+				maxId = ctrlngValObj.CtrlingVals[0].CtrlValsId
+				for _,j := range ctrlngValObj.CtrlingVals{
+					if(maxId < j.CtrlValsId && j.CtrlValsId != ""){
+						maxId = j.CtrlValsId
 					}
-					var existingZip CR.UnProGenDataCol
-					existingZip.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.ZipCode = -999
-					ctrlColl.Pipe(pipeline).One(&existingZip)
+				}
+				updateData.CtrlgVals.CtrlingVals[0].CtrlValsId = IDGen(maxId)
+				updateData.CtrlgVals.CondDateId = updateData.Conddate.CondDateId
+				ctrldValsColl.Find(bson.M{}).Select(
+					bson.M{"ctrledvals.ctrldvalid":1}).Sort("-ctrledvals.ctrldvalid").Limit(1).One(&ctrldValObj)
+				for _,j := range ctrldValObj.CtrledVals {
+					if (maxId < j.CtrldValId && j.CtrldValId != "") {
+						maxId = j.CtrldValId
+					}
+				}
+				updateData.CtrldVals.CtrledVals[0].CtrldValId = IDGen(maxId)
+				updateData.CtrldVals.CtrlValsId = updateData.CtrlgVals.CtrlingVals[0].CtrlValsId
 
-					if(existingZip.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.ZipCode == -999){
+				err = ctrlgValsColl.Update(bson.M{"conddateid":updateData.Conddate.CondDateId},
+					bson.M{"$push":bson.M{"ctrlingvals":updateData.CtrlgVals.CtrlingVals[0]}})
+				if err!= nil{
+					panic(err)
+				}
+				err = ctrldValsColl.Insert(updateData.CtrldVals)
+				if err!= nil{
+					panic(err)
+				}
+			}else{
+				var controllingId string
+				for _,j:= range ctrlngValsObj.CtrlingVals{
+					if(j.CondOut == updateData.CtrlgVals.CtrlingVals[0].CondOut &&
+					j.TempOut == updateData.CtrlgVals.CtrlingVals[0].TempOut &&
+					j.LightOut == updateData.CtrlgVals.CtrlingVals[0].LightOut &&
+					j.PplIn == updateData.CtrlgVals.CtrlingVals[0].PplIn){
+						controllingId = j.CtrlValsId
+						break
+					}
+				}
 
-					}else{
-						pipeline := []bson.M{
-							{"$match":bson.M{"condoutrecord":updateData.CondOutRecord}},
-							{"$unwind":"$controlmonth"},
-							{"$match":bson.M{"controlmonth.monthrecord":updateData.ControlMonth.MonthRecord}},
-							{"$unwind":"$controlmonth.controldate"},
-							{"$match":bson.M{"controlmonth.controldate.daterecord":updateData.ControlMonth.ControlDate.DateRecord}},
-							{"$unwind":"$controlmonth.controldate.controltime"},
-							{"$match":bson.M{"controlmonth.controldate.controltime.timerecord":updateData.ControlMonth.ControlDate.ControlTime.TimeRecord}},
-							{"$unwind":"$controlmonth.controldate.controltime.areaziptorecord"},
-							{"$match":bson.M{"controlmonth.controldate.controltime.areaziptorecord.zipcode":updateData.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.ZipCode}},
-							{"$unwind":"$controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp"},
-							{"$match":bson.M{"controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidetemp":updateData.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideTemp}},
-							{"$project":bson.M{"controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidetemp":1}},
+				updateData.CtrlgVals.CtrlingVals[0].CtrlValsId = controllingId
+				ctrldValsColl.Find(bson.M{"ctrlvalsid":ctrlngValsObj.CtrlingVals[0].CtrlValsId,
+							   "ctrledvals:tempin":updateData.CtrldVals.CtrledVals[0].TempIn,
+							   "ctrledvals:lightin":updateData.CtrldVals.CtrledVals[0].LightIn,
+							   "ctrledvals:musicin":updateData.CtrldVals.CtrledVals[0].MusicIn}).Select(
+					bson.M{"ctrledvals.ctrldvalid":1}).One(&ctrldValsObj)
+				if (ctrldValsObj.CtrledVals == nil) {
+					ctrldValsColl.Find(bson.M{}).Select(
+						bson.M{"ctrledvals.ctrldvalid":1}).Sort("-ctrledvals.ctrldvalid").Limit(1).One(&ctrldValObj)
+
+					for _, j := range ctrldValObj.CtrledVals {
+						if (maxId < j.CtrldValId && j.CtrldValId != "") {
+							maxId = j.CtrldValId
 						}
-						var existingOutTemp CR.UnProGenDataCol
-						existingOutTemp.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideTemp= -999
-						ctrlColl.Pipe(pipeline).One(&existingOutTemp)
-
-						if(existingOutTemp.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideTemp==-999){
-
-						}else{
-							pipeline := []bson.M{
-								{"$match":bson.M{"condoutrecord":updateData.CondOutRecord}},
-								{"$unwind":"$controlmonth"},
-								{"$match":bson.M{"controlmonth.monthrecord":updateData.ControlMonth.MonthRecord}},
-								{"$unwind":"$controlmonth.controldate"},
-								{"$match":bson.M{"controlmonth.controldate.daterecord":updateData.ControlMonth.ControlDate.DateRecord}},
-								{"$unwind":"$controlmonth.controldate.controltime"},
-								{"$match":bson.M{"controlmonth.controldate.controltime.timerecord":updateData.ControlMonth.ControlDate.ControlTime.TimeRecord}},
-								{"$unwind":"$controlmonth.controldate.controltime.areaziptorecord"},
-								{"$match":bson.M{"controlmonth.controldate.controltime.areaziptorecord.zipcode":updateData.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.ZipCode}},
-								{"$unwind":"$controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp"},
-								{"$match":bson.M{"controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidetemp":updateData.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideTemp}},
-								{"$unwind":"$controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidecontrollight"},
-								{"$match":bson.M{"controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidecontrollight.outsidelight":updateData.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideControlLight.OutsideLight}},
-								{"$project":bson.M{"controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidecontrollight.outsidelight":1}},
-							}
-							var existingOutLight CR.UnProGenDataCol
-							existingOutLight.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideControlLight.OutsideLight= -999
-							ctrlColl.Pipe(pipeline).One(&existingOutLight)
-
-							if(existingOutLight.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideControlLight.OutsideLight== -999){
-
-							}else{
-								pipeline := []bson.M{
-									{"$match":bson.M{"condoutrecord":updateData.CondOutRecord}},
-									{"$unwind":"$controlmonth"},
-									{"$match":bson.M{"controlmonth.monthrecord":updateData.ControlMonth.MonthRecord}},
-									{"$unwind":"$controlmonth.controldate"},
-									{"$match":bson.M{"controlmonth.controldate.daterecord":updateData.ControlMonth.ControlDate.DateRecord}},
-									{"$unwind":"$controlmonth.controldate.controltime"},
-									{"$match":bson.M{"controlmonth.controldate.controltime.timerecord":updateData.ControlMonth.ControlDate.ControlTime.TimeRecord}},
-									{"$unwind":"$controlmonth.controldate.controltime.areaziptorecord"},
-									{"$match":bson.M{"controlmonth.controldate.controltime.areaziptorecord.zipcode":updateData.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.ZipCode}},
-									{"$unwind":"$controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp"},
-									{"$match":bson.M{"controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidetemp":updateData.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideTemp}},
-									{"$unwind":"$controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidecontrollight"},
-									{"$match":bson.M{"controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidecontrollight.outsidelight":updateData.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideControlLight.OutsideLight}},
-									{"$unwind":"$controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidecontrollight.insidecontrolmusic"},
-									{"$match":bson.M{"controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidecontrollight.insidecontrolmusic.musiclevel":updateData.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideControlLight.InsideControlMusic.MusicLevel}},
-									{"$project":bson.M{"controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidecontrollight.insidecontrolmusic.musiclevel":1}},
-								}
-								var existingInMusic CR.UnProGenDataCol
-								existingInMusic.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideControlLight.InsideControlMusic.MusicLevel= -999
-								ctrlColl.Pipe(pipeline).One(&existingInMusic)
-
-								if (existingInMusic.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideControlLight.InsideControlMusic.MusicLevel== -999){
-
-								}else{
-									pipeline := []bson.M{
-										{"$match":bson.M{"condoutrecord":updateData.CondOutRecord}},
-										{"$unwind":"$controlmonth"},
-										{"$match":bson.M{"controlmonth.monthrecord":updateData.ControlMonth.MonthRecord}},
-										{"$unwind":"$controlmonth.controldate"},
-										{"$match":bson.M{"controlmonth.controldate.daterecord":updateData.ControlMonth.ControlDate.DateRecord}},
-										{"$unwind":"$controlmonth.controldate.controltime"},
-										{"$match":bson.M{"controlmonth.controldate.controltime.timerecord":updateData.ControlMonth.ControlDate.ControlTime.TimeRecord}},
-										{"$unwind":"$controlmonth.controldate.controltime.areaziptorecord"},
-										{"$match":bson.M{"controlmonth.controldate.controltime.areaziptorecord.zipcode":updateData.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.ZipCode}},
-										{"$unwind":"$controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp"},
-										{"$match":bson.M{"controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidetemp":updateData.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideTemp}},
-										{"$unwind":"$controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidecontrollight"},
-										{"$match":bson.M{"controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidecontrollight.outsidelight":updateData.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideControlLight.OutsideLight}},
-										{"$unwind":"$controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidecontrollight.insidecontrolmusic"},
-										{"$match":bson.M{"controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidecontrollight.insidecontrolmusic.musiclevel":updateData.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideControlLight.InsideControlMusic.MusicLevel}},
-										{"$unwind":"$controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidecontrollight.insidecontrolmusic.insidecontrolppl"},
-										{"$match":bson.M{"controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidecontrollight.insidecontrolmusic.insidecontrolppl.pplcount":updateData.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideControlLight.InsideControlMusic.InsideControlPpl.PplCount}},
-										{"$project":bson.M{"controlmonth.controldate.controltime.areaziptorecord.outsidecontroltemp.outsidecontrollight.insidecontrolmusic.insidecontrolppl.pplcount":1}},
-									}
-
-									var existingInPpl CR.UnProGenDataCol
-									existingInPpl.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideControlLight.InsideControlMusic.InsideControlPpl.PplCount= -999
-									ctrlColl.Pipe(pipeline).One(&existingInPpl)
-
-									if(existingInPpl.ControlMonth.ControlDate.ControlTime.AreaZipToRecord.OutsideControlTemp.OutsideControlLight.InsideControlMusic.InsideControlPpl.PplCount== -999){
-
-									}else{
-
-									}
-									fmt.Println(existingInMusic)
-								}
-							}
-						}
+					}
+					updateData.CtrldVals.CtrledVals[0].CtrldValId = IDGen(maxId)
+					err = ctrldValsColl.Update(bson.M{"ctrlvalsid":updateData.CtrlgVals.CtrlingVals[0].CtrlValsId},
+						bson.M{"$push":bson.M{"ctrledvals":updateData.CtrldVals.CtrledVals[0]}})
+					if err!= nil {
+						panic(err)
 					}
 				}
 			}
 
 		}
-
 	}
-
+	fmt.Println(locObj)
 
 	return updateCtrlData
 }
