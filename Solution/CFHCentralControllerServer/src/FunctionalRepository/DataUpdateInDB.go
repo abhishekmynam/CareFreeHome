@@ -163,20 +163,20 @@ func UpdateGenControlData (updateData CR.GlobalCtrlData)string{
 				var controllingId string
 				for _,j:= range ctrlngValsObj.CtrlingVals{
 					if(j.CondOut == updateData.CtrlgVals.CtrlingVals[0].CondOut &&
-					j.TempOut == updateData.CtrlgVals.CtrlingVals[0].TempOut &&
-					j.LightOut == updateData.CtrlgVals.CtrlingVals[0].LightOut &&
-					j.PplIn == updateData.CtrlgVals.CtrlingVals[0].PplIn){
+						j.TempOut == updateData.CtrlgVals.CtrlingVals[0].TempOut &&
+						j.LightOut == updateData.CtrlgVals.CtrlingVals[0].LightOut &&
+						j.PplIn == updateData.CtrlgVals.CtrlingVals[0].PplIn){
 						controllingId = j.CtrlValsId
 						break
 					}
 				}
 
 				updateData.CtrlgVals.CtrlingVals[0].CtrlValsId = controllingId
-				ctrldValsColl.Find(bson.M{"ctrlvalsid":ctrlngValsObj.CtrlingVals[0].CtrlValsId,
-							   "ctrledvals:tempin":updateData.CtrldVals.CtrledVals[0].TempIn,
-							   "ctrledvals:lightin":updateData.CtrldVals.CtrledVals[0].LightIn,
-							   "ctrledvals:musicin":updateData.CtrldVals.CtrledVals[0].MusicIn}).Select(
-					bson.M{"ctrledvals.ctrldvalid":1}).One(&ctrldValsObj)
+				ctrldValsColl.Find(bson.M{"ctrlvalsid":updateData.CtrlgVals.CtrlingVals[0].CtrlValsId,
+							   "ctrledvals.tempin":updateData.CtrldVals.CtrledVals[0].TempIn,
+							   "ctrledvals.lightin":updateData.CtrldVals.CtrledVals[0].LightIn,
+							   "ctrledvals.musicin":updateData.CtrldVals.CtrledVals[0].MusicIn}).Select(
+					bson.M{"ctrledvals":1}).One(&ctrldValsObj)
 				if (ctrldValsObj.CtrledVals == nil) {
 					ctrldValsColl.Find(bson.M{}).Select(
 						bson.M{"ctrledvals.ctrldvalid":1}).Sort("-ctrledvals.ctrldvalid").Limit(1).One(&ctrldValObj)
@@ -191,6 +191,22 @@ func UpdateGenControlData (updateData CR.GlobalCtrlData)string{
 						bson.M{"$push":bson.M{"ctrledvals":updateData.CtrldVals.CtrledVals[0]}})
 					if err!= nil {
 						return "failed creating data"
+					}
+				}else{
+					for _,j:= range ctrldValsObj.CtrledVals{
+						if(j.LightIn == updateData.CtrldVals.CtrledVals[0].LightIn &&
+							j.TempIn == updateData.CtrldVals.CtrledVals[0].TempIn &&
+							j.MusicIn == updateData.CtrldVals.CtrledVals[0].MusicIn ){
+
+							err = ctrldValsColl.Update(bson.M{"ctrlvalsid":updateData.CtrlgVals.CtrlingVals[0].CtrlValsId,
+								"ctrledvals.ctrldvalid":j.CtrldValId}, bson.M{"$set":bson.M{
+								"ctrledvals.$.tempin":j.TempIn,"ctrledvals.$.lightin": j.LightIn,  "ctrledvals.$.musicin":j.MusicIn,
+								"ctrledvals.$.homescount":j.HomesCount +1}})
+							if err!= nil {
+								panic(err)
+								return "failed creating data"
+							}
+						}
 					}
 				}
 			}

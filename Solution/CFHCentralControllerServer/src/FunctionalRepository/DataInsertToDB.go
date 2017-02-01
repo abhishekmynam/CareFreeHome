@@ -32,21 +32,3 @@ func SaveUser (newUser CR.User ) string {
 	}
 	return saveUserStat
 }
-/*
-func SaveNewOutCondition (newUnProGenDataCol CR.UnProGenDataCol)string{
-	var saveNewConditionOutStatus string
-	session, err:= mgo.Dial(CR.DBserver)
-	if err!= nil{
-		panic(err)
-	}
-	defer session.Close()
-	ctrlColl := session.DB(CR.DBInstance).C(CR.GlobalCtrlVals)
-	var existingCondition CR.UnProGenDataCol
-	err = ctrlColl.Find(bson.M{"condoutrecord":newUnProGenDataCol.CondOutRecord}).One(&existingCondition)
-	if(len(existingCondition.CondOutRecord)==0){
-		err = ctrlColl.Insert(newUnProGenDataCol)
-	}
-	return saveNewConditionOutStatus
-}
-
-*/

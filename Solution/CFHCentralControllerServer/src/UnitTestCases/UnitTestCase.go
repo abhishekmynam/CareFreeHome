@@ -17,13 +17,20 @@ func main() {
 	//updateUser()
 	insertGenData()
 	//getIdGen()
+	//removeOutliers()
 
 }
 
 func getOutliers(){
-	DataList := []float64{3, 5, 3, 11, 6, 7, 4, 6, 9, 0, 4, 5, 21, 22, 23, -12, -13}
-	outliersList := FunctionalRepository.GetOutliers(DataList)
+	outliersList := []float64{3, 5, 3, 11, 6, 7, 4, 6, 9, 0, 4, 5, 21, 22, 23, -12, -13}
+	//outliersList := FunctionalRepository.GetOutliers(DataList)
 	fmt.Println(outliersList)
+}
+
+func removeOutliers(){
+	outliersList := []float64{3, 5, 3, 11, 6, 7, 4, 6, 9, 0, 4, 5, 21, 22, 23, -12, -13}
+	NooutliersList := FunctionalRepository.RemoveOutliers(outliersList)
+	fmt.Println(NooutliersList)
 }
 
 func getMode(){
