@@ -12,8 +12,10 @@ var ControlledValsColl = "ControlledVals"
 var ControllingValsColl = "ControllingVals"
 var CondDateColl = "CondDate"
 var LocColl = "Location"
+var ProcessedCtrlDataCollection = "ProcessedCtrlData"
 
 
 var DBserver = DBServerTest
 var DBInstance = DBInstanceTest
+
 

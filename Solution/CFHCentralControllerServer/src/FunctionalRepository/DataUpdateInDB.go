@@ -33,7 +33,22 @@ func UpdateUser (newUser CR.User) string {
 	return DeactivateUserStatus
 }
 
-func UpdateProcessedCtrldData(){}
+func UpdateProcessedCtrldData(procData CR.ProcessedCtrlData) (updateProcCtrlDataStat string){
+	session, err := mgo.Dial(CR.DBserver)
+	if err != nil {
+		panic(err)
+	}
+	defer session.Close()
+	procDataColl := session.DB(CR.DBInstance).C(CR.ProcessedCtrlDataCollection)
+	_,err = procDataColl.Upsert(bson.M{"zipcode":procData.Zipcode, "country":procData.Country,
+				"dtime":procData.Dtime, "working":procData.Working, "condout": procData.CondOut,
+				"tempout":procData.TempOut, "lightout":procData.LightOut, "pplin":procData.PplIn},procData )
+	if err!=nil{
+		log.Fatal(err)
+	}else{updateProcCtrlDataStat = "success"}
+
+	return updateProcCtrlDataStat
+}
 
 func UpdateGenControlData (updateData CR.GlobalCtrlData)string{
 	var updateCtrlData string

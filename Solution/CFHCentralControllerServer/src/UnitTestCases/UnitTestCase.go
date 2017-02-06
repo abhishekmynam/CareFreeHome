@@ -18,7 +18,8 @@ func main() {
 	//insertGenData()
 	//getIdGen()
 	//removeOutliers()
-	getDataForCondition()
+	//getDataForCondition()
+	UpdateProcessedCtrldData()
 
 }
 
@@ -36,7 +37,7 @@ func removeOutliers(){
 
 func getMode(){
 	DataList := []float64{3, 5, 3, 11, 6, 7, 4, 6, 9, 0, 4, 5, 21, 22, 23, -12, -13}
-	mode := FunctionalRepository.GetMode(DataList)
+	mode,_ := FunctionalRepository.GetMode(DataList)
 	fmt.Println(mode)
 }
 
@@ -123,4 +124,21 @@ func getAsArray (thisVals ConfigurationRepository.ControlledVals){
 	thisArr:=FunctionalRepository.GetWeightedFieldArray(thisVals, "TempIn")
 	fmt.Println(thisArr)
 
+}
+
+func UpdateProcessedCtrldData (){
+	var pcd ConfigurationRepository.ProcessedCtrlData
+	pcd.Zipcode ="19333"
+	pcd.Country = "USA"
+	pcd.Dtime = "12Jan201712"
+	pcd.Working = false
+	pcd.CondOut = "snow"
+	pcd.TempOut = 55
+	pcd.LightOut = 65
+	pcd.PplIn = 100
+	pcd.TempIn = 46
+	pcd.LightIn = 36
+	pcd.MusicIn = 16
+
+	FunctionalRepository.UpdateProcessedCtrldData(pcd)
 }

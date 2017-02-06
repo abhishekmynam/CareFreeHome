@@ -74,3 +74,17 @@ type CurrCond struct {
 	Working bool
 	Outvals OutsideVals
 }
+
+type ProcessedCtrlData struct{
+	Zipcode string
+	Country string
+	Dtime string
+	Working bool
+	CondOut string
+	TempOut float64
+	LightOut float64
+	PplIn int64
+	TempIn float64
+	LightIn float64
+	MusicIn float64
+}
