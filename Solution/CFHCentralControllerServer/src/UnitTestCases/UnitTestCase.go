@@ -15,9 +15,10 @@ func main() {
 	//saveUser()
 	//removeUser()
 	//updateUser()
-	insertGenData()
+	//insertGenData()
 	//getIdGen()
 	//removeOutliers()
+	getDataForCondition()
 
 }
 
@@ -101,4 +102,25 @@ func getIdGen(){
 	id := "LOC1234"
 	thisid:=FunctionalRepository.IDGen(id)
 	fmt.Println(thisid)
+}
+func getDataForCondition(){
+	var conditions  ConfigurationRepository.CurrCond
+	var thisVals ConfigurationRepository.ControlledVals
+	conditions.ZipCode = "19333"
+	conditions.Country = "USA"
+	conditions.Working = false
+	conditions.DateTime = "10Jan201612"
+	conditions.Outvals.TempOut = 55
+	conditions.Outvals.LightOut = 40
+	conditions.Outvals.PplIn = 100
+	conditions.Outvals.CondOut = "snow"
+
+	thisVals = FunctionalRepository.GetDataCurCond(conditions)
+	getAsArray(thisVals)
+}
+
+func getAsArray (thisVals ConfigurationRepository.ControlledVals){
+	thisArr:=FunctionalRepository.GetWeightedFieldArray(thisVals, "TempIn")
+	fmt.Println(thisArr)
+
 }

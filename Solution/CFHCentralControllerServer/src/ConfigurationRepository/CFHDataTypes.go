@@ -66,3 +66,11 @@ type GlobalCtrlData struct{
 	CtrlgVals ControllingVals
 	CtrldVals ControlledVals
 }
+
+type CurrCond struct {
+	Country string
+	ZipCode string
+	DateTime string
+	Working bool
+	Outvals OutsideVals
+}

@@ -33,6 +33,8 @@ func UpdateUser (newUser CR.User) string {
 	return DeactivateUserStatus
 }
 
+func UpdateProcessedCtrldData(){}
+
 func UpdateGenControlData (updateData CR.GlobalCtrlData)string{
 	var updateCtrlData string
 	session, err:= mgo.Dial(CR.DBserver)

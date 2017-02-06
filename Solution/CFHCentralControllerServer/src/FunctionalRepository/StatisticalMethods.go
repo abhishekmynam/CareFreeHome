@@ -59,9 +59,9 @@ func getOutliers( dataList []float64)[]float64{
 	return minMaxOutlier;
 }
 
-func GetMode(numbers []float64) (modes []float64) {
+func GetMode(numbers []float64) (modes []float64, highestFrequency int64) {
 	frequencies := make(map[float64]int, len(numbers))
-	highestFrequency := 0
+	//highestFrequency := 0
 	for _, x := range numbers {
 		frequencies[x]++
 		if frequencies[x] > highestFrequency {
@@ -77,7 +77,7 @@ func GetMode(numbers []float64) (modes []float64) {
 		modes = modes[:0] // Or: modes = []float64{}
 	}
 	sort.Float64s(modes)
-	return modes
+	return modes, highestFrequency
 }
 
 func GetStdDev(numbers []float64) float64 {

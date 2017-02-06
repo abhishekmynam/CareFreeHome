@@ -3,6 +3,7 @@ package FunctionalRepository
 import (
 	CR "ConfigurationRepository"
 	"strconv"
+	"reflect"
 )
 
 func GetUnProGenDataColObj(tempInside float64, lightInside float64,
@@ -51,4 +52,13 @@ func IDGen (prevId string) string{
 	nextId = prevId[:3]+thisIdstr
 	return nextId
 }
+
+func GetWeightedFieldArray(valsObj CR.ControlledVals, field string) []float64{
+	fldValue := make([] float64,0)
+	for _,j := range valsObj.CtrledVals{
+		fldValue = append(fldValue,reflect.ValueOf(j).FieldByName(field).Float()*float64(j.HomesCount))
+	}
+	return fldValue
+}
+
 
