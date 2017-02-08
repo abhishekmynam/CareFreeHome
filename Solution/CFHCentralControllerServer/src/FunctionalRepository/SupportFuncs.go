@@ -56,7 +56,7 @@ func IDGen (prevId string) string{
 func GetWeightedFieldArray(valsObj CR.ControlledVals, field string) []float64{
 	fldValue := make([] float64,0)
 	for _,j := range valsObj.CtrledVals{
-		fldValue = append(fldValue,reflect.ValueOf(j).FieldByName(field).Float()*float64(j.HomesCount))
+		fldValue = append(fldValue,reflect.ValueOf(j).FieldByName(field).Float())//*float64(j.HomesCount))
 	}
 	return fldValue
 }

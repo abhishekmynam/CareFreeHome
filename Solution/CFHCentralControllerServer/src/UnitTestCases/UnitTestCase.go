@@ -19,7 +19,8 @@ func main() {
 	//getIdGen()
 	//removeOutliers()
 	//getDataForCondition()
-	UpdateProcessedCtrldData()
+	//UpdateProcessedCtrldData()
+	ProcessDataForLocalCondVals()
 
 }
 
@@ -141,4 +142,20 @@ func UpdateProcessedCtrldData (){
 	pcd.MusicIn = 16
 
 	FunctionalRepository.UpdateProcessedCtrldData(pcd)
+}
+
+
+func ProcessDataForLocalCondVals(){
+	var conditions  ConfigurationRepository.CurrCond
+	conditions.ZipCode = "19333"
+	conditions.Country = "USA"
+	conditions.Working = false
+	conditions.DateTime = "10Jan201612"
+	conditions.Outvals.TempOut = 55
+	conditions.Outvals.LightOut = 40
+	conditions.Outvals.PplIn = 100
+	conditions.Outvals.CondOut = "snow"
+
+	x,y,z:=FunctionalRepository.ProcessDataForLocalCondVals(conditions)
+	fmt.Println(x,y,z)
 }

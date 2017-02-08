@@ -6,6 +6,7 @@ import (
 	CR "ConfigurationRepository"
 	"gopkg.in/mgo.v2/bson"
 	"time"
+	"strconv"
 )
 
 func UpdateUser (newUser CR.User) string {
@@ -66,7 +67,7 @@ func UpdateGenControlData (updateData CR.GlobalCtrlData)string{
 	var dtimeObj CR.CondDate
 	var ctrlngValsObj,ctrlngValObj CR.ControllingVals
 	var ctrldValsObj, ctrldValObj CR.ControlledVals
-	var maxId string
+	var maxId int
 	updateCtrlData = "Successfully created data"
 	locColl.Find(bson.M{"zipcode":updateData.Loc.Zipcode, "country":updateData.Loc.Country}).Select(bson.M{"zipcode":1,"locid":1}).One(&locObj)
 
@@ -149,22 +150,29 @@ func UpdateGenControlData (updateData CR.GlobalCtrlData)string{
 				//check from here
 				ctrlgValsColl.Find(bson.M{}).Select(
 					bson.M{"ctrlingvals.ctrlvalsid":1}).Sort("-ctrlingvals.ctrlvalsid").Limit(1).One(&ctrlngValObj)
-				maxId = ctrlngValObj.CtrlingVals[0].CtrlValsId
+				maxId,_ = strconv.Atoi(ctrlngValObj.CtrlingVals[0].CtrlValsId)
 				for _,j := range ctrlngValObj.CtrlingVals{
-					if(maxId < j.CtrlValsId && j.CtrlValsId != ""){
-						maxId = j.CtrlValsId
+					thisId,_:= strconv.Atoi(j.CtrlValsId[3:])
+					if(maxId < thisId && j.CtrlValsId != ""){
+						maxId = thisId
 					}
 				}
-				updateData.CtrlgVals.CtrlingVals[0].CtrlValsId = IDGen(maxId)
+				maxId += 1
+				nextId := ctrlngValObj.CtrlingVals[0].CtrlValsId[:3]+strconv.Itoa(maxId)
+				updateData.CtrlgVals.CtrlingVals[0].CtrlValsId = nextId
 				updateData.CtrlgVals.CondDateId = updateData.Conddate.CondDateId
 				ctrldValsColl.Find(bson.M{}).Select(
 					bson.M{"ctrledvals.ctrldvalid":1}).Sort("-ctrledvals.ctrldvalid").Limit(1).One(&ctrldValObj)
+				maxId = 0
 				for _,j := range ctrldValObj.CtrledVals {
-					if (maxId < j.CtrldValId && j.CtrldValId != "") {
-						maxId = j.CtrldValId
+					thisId,_:= strconv.Atoi(j.CtrldValId[3:])
+					if (maxId < thisId && j.CtrldValId != "") {
+						maxId = thisId
 					}
 				}
-				updateData.CtrldVals.CtrledVals[0].CtrldValId = IDGen(maxId)
+				maxId += 1
+				nextId = ctrldValObj.CtrledVals[0].CtrldValId[:3]+strconv.Itoa(maxId)
+				updateData.CtrldVals.CtrledVals[0].CtrldValId = nextId
 				updateData.CtrldVals.CtrlValsId = updateData.CtrlgVals.CtrlingVals[0].CtrlValsId
 
 				err = ctrlgValsColl.Update(bson.M{"conddateid":updateData.Conddate.CondDateId},
@@ -198,12 +206,16 @@ func UpdateGenControlData (updateData CR.GlobalCtrlData)string{
 					ctrldValsColl.Find(bson.M{}).Select(
 						bson.M{"ctrledvals.ctrldvalid":1}).Sort("-ctrledvals.ctrldvalid").Limit(1).One(&ctrldValObj)
 
-					for _, j := range ctrldValObj.CtrledVals {
-						if (maxId < j.CtrldValId && j.CtrldValId != "") {
-							maxId = j.CtrldValId
+					maxId = 0
+					for _,j := range ctrldValObj.CtrledVals {
+						thisId,_:= strconv.Atoi(j.CtrldValId[3:])
+						if (maxId < thisId && j.CtrldValId != "") {
+							maxId = thisId
 						}
 					}
-					updateData.CtrldVals.CtrledVals[0].CtrldValId = IDGen(maxId)
+					maxId += 1
+					nextId := ctrldValObj.CtrledVals[0].CtrldValId[:3]+strconv.Itoa(maxId)
+					updateData.CtrldVals.CtrledVals[0].CtrldValId = nextId
 					err = ctrldValsColl.Update(bson.M{"ctrlvalsid":updateData.CtrlgVals.CtrlingVals[0].CtrlValsId},
 						bson.M{"$push":bson.M{"ctrledvals":updateData.CtrldVals.CtrledVals[0]}})
 					if err!= nil {

@@ -3,11 +3,12 @@ package FunctionalRepository
 import (
 	"sort"
 	"math"
-	"fmt"
+//	"fmt"
 )
 
-func getOutliers( dataList []float64)[]float64{
-	minMaxOutlier := []float64{}
+func getOutliers( dataList []float64)(float64 ,float64){
+	var minOutlier  float64 =-999
+	var maxOutlier  float64 =-999
 	listOutliers:= []float64{}
 	listOutliers2:= []float64{}
 	sort.Float64s(dataList)
@@ -48,15 +49,19 @@ func getOutliers( dataList []float64)[]float64{
 		}else{break}
 	}
 	sort.Float64s(listOutliers)
-	minMaxOutlier = append(minMaxOutlier, listOutliers[len(listOutliers)-1] )
+	if(len(listOutliers)!=0){
+		minOutlier =  listOutliers[0]
+	}
 	for i := range dataList{
 		if(dataList[len(dataList)-i-1]>= maxForOL){
 			listOutliers2 = append(listOutliers2,dataList[len(dataList)-i-1])
 		}else{break}
 	}
 	sort.Float64s(listOutliers2)
-	minMaxOutlier = append(minMaxOutlier, listOutliers2[0] )
-	return minMaxOutlier;
+	if(len(listOutliers2)!=0){
+		maxOutlier =  listOutliers2[0]
+	}
+	return minOutlier,maxOutlier;
 }
 
 func GetMode(numbers []float64) (modes []float64, highestFrequency int64) {
@@ -108,9 +113,17 @@ func SumOfSliceElements(numbers []float64) (total float64) {
 }
 
 func RemoveOutliers (numbers []float64)[]float64{
-	var outliersRemoved = make([] float64,0)
-	outliers := getOutliers(numbers)
+	//var outliersRemoved = make([] float64,0)
+	minOutliers, maxOutliers := getOutliers(numbers)
 	sort.Float64s(numbers)
-	fmt.Println(numbers[sort.SearchFloat64s(numbers, outliers[0])+1:sort.SearchFloat64s(numbers, outliers[1])])
-	return outliersRemoved
+	start:= 0
+	end:= len(numbers)
+	//numbers[sort.SearchFloat64s(numbers, minOutliers)+1:sort.SearchFloat64s(numbers, maxOutliers)]
+	if(minOutliers != -999){
+		start= sort.SearchFloat64s(numbers, minOutliers)+1
+	}
+	if(maxOutliers != -999) {
+		end = sort.SearchFloat64s(numbers, maxOutliers)
+	}
+	return numbers[start:end]
 }
