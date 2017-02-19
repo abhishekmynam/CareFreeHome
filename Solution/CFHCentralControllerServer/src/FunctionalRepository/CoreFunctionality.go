@@ -12,13 +12,15 @@ func ProcessDataForLocalCondVals ( currCond CR.CurrCond)( float64,float64, float
 	var musicForLightModeVal, lightForTempModeVal float64
 
 	thisCondVals = GetDataCurCond(currCond)
-	tempArr:= RemoveOutliers(GetWeightedFieldArray(thisCondVals, "TempIn"))
-	lightArr := RemoveOutliers(GetWeightedFieldArray(thisCondVals, "LightIn"))
-	musicArr := RemoveOutliers(GetWeightedFieldArray(thisCondVals, "MusicIn"))
+	stats := Stats()
+	support := SupportFuncs()
+	tempArr:=stats.RemoveOutliers(support.GetWeightedFieldArray(thisCondVals, "TempIn"))
+	lightArr := stats.RemoveOutliers(support.GetWeightedFieldArray(thisCondVals, "LightIn"))
+	musicArr := stats.RemoveOutliers(support.GetWeightedFieldArray(thisCondVals, "MusicIn"))
 
-	tempMode, _ := GetMode(tempArr)
-	lightModeOA, lightModeCnt := GetMode(lightArr)
-	musicModeOA, musicModeCnt := GetMode(musicArr)
+	tempMode, _ := stats.GetMode(tempArr)
+	lightModeOA, lightModeCnt := stats.GetMode(lightArr)
+	musicModeOA, musicModeCnt := stats.GetMode(musicArr)
 	controlledValues := thisCondVals.CtrledVals
 	for _,j := range controlledValues{
 		if(j.TempIn == tempMode[0]){
@@ -26,7 +28,7 @@ func ProcessDataForLocalCondVals ( currCond CR.CurrCond)( float64,float64, float
 		}
 	}
 	if(len(lightForTemp)!=0) {
-		lightForTempMode, tempLightModeCnt1 := GetMode(lightForTemp)
+		lightForTempMode, tempLightModeCnt1 := stats.GetMode(lightForTemp)
 		lightForTempModeVal = lightForTempMode[0]
 		tempLightModeCnt = tempLightModeCnt1
 	}
@@ -38,7 +40,7 @@ func ProcessDataForLocalCondVals ( currCond CR.CurrCond)( float64,float64, float
 		}
 	}
 	if(len(musicForLight)!=0) {
-		musicForLightMode, lightMusicModeCnt1 := GetMode(musicForLight)
+		musicForLightMode, lightMusicModeCnt1 := stats.GetMode(musicForLight)
 		musicForLightModeVal = musicForLightMode[0]
 		lightMusicModeCnt =lightMusicModeCnt1
 	}

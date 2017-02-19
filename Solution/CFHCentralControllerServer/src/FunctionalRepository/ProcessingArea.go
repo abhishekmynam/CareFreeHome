@@ -4,7 +4,18 @@ import(
 	CR "ConfigurationRepository"
 )
 
-func ProcessDataForThisHour()string{
+type processData interface{
+	ProcessDataForThisHour() string
+}
+
+type processDataFuncs struct{
+}
+
+func ProcessDBData() processData{
+	return &processDataFuncs{}
+}
+
+func (p processDataFuncs)ProcessDataForThisHour()string{
 
 	var outsideCondition CR.CurrCond
 	var updateData CR.ProcessedCtrlData
@@ -24,8 +35,8 @@ func ProcessDataForThisHour()string{
 	updateData.TempIn = temp
 	updateData.LightIn = light
 	updateData.MusicIn = music
-
-	procState:= UpdateProcessedCtrldData(updateData)
+	dbUpdate:= DBDataUpdate()
+	procState:= dbUpdate.UpdateProcessedCtrldData(updateData)
 
 	return procState
 }

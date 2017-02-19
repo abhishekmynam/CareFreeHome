@@ -7,7 +7,18 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-func RemoveUser(email string) string{
+type removeFromDB interface {
+	RemoveUser(email string)string
+}
+
+type removeDataFromDb struct{
+}
+
+func RemoveFromDb() removeFromDB{
+	return &removeDataFromDb{}
+}
+
+func (rem removeDataFromDb)RemoveUser(email string) string{
 	var removeUserStat string
 	session, err:= mgo.Dial(CR.DBserver)
 	if err!= nil{

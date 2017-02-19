@@ -9,7 +9,20 @@ import (
 	"strconv"
 )
 
-func UpdateUser (newUser CR.User) string {
+type dbUpdates interface {
+	UpdateUser (newUser CR.User) string
+	UpdateProcessedCtrldData(procData CR.ProcessedCtrlData) string
+	UpdateGenControlData (updateData CR.GlobalCtrlData)string
+}
+
+type dbDateUpdate struct{
+}
+
+func DBDataUpdate() dbUpdates{
+	return &dbDateUpdate{}
+}
+
+func (dbUpdt dbDateUpdate)UpdateUser (newUser CR.User) string {
 	var DeactivateUserStatus string
 	session, err := mgo.Dial(CR.DBserver)
 	if err != nil {
@@ -34,7 +47,7 @@ func UpdateUser (newUser CR.User) string {
 	return DeactivateUserStatus
 }
 
-func UpdateProcessedCtrldData(procData CR.ProcessedCtrlData) (updateProcCtrlDataStat string){
+func (dbUpdt dbDateUpdate)UpdateProcessedCtrldData(procData CR.ProcessedCtrlData) (updateProcCtrlDataStat string){
 	session, err := mgo.Dial(CR.DBserver)
 	if err != nil {
 		panic(err)
@@ -51,13 +64,14 @@ func UpdateProcessedCtrldData(procData CR.ProcessedCtrlData) (updateProcCtrlData
 	return updateProcCtrlDataStat
 }
 
-func UpdateGenControlData (updateData CR.GlobalCtrlData)string{
+func (dbUpdt dbDateUpdate)UpdateGenControlData (updateData CR.GlobalCtrlData)string{
 	var updateCtrlData string
 	session, err:= mgo.Dial(CR.DBserver)
 	if err!= nil{
 		panic(err)
 	}
 	defer session.Close()
+	supFunc := SupportFuncs()
 	locColl := session.DB(CR.DBInstance).C(CR.LocColl)
 	dtimeColl := session.DB(CR.DBInstance).C(CR.CondDateColl)
 	ctrlgValsColl := session.DB(CR.DBInstance).C(CR.ControllingValsColl)
@@ -74,21 +88,21 @@ func UpdateGenControlData (updateData CR.GlobalCtrlData)string{
 	if(len(locObj.Zipcode)==0){
 		locColl.Find(bson.M{"locid":bson.M{"$ne":""}}).Select(
 			bson.M{"locid":1}).Sort("-locid").Limit(1).One(&locObj)
-		updateData.Loc.LocId = IDGen(locObj.LocId)
+		updateData.Loc.LocId = supFunc.IDGen(locObj.LocId)
 
 		dtimeColl.Find(bson.M{"conddateid":bson.M{"$ne":""}}).Select(
 			bson.M{"conddateid":1}).Sort("-conddateid").Limit(1).One(&dtimeObj)
-		updateData.Conddate.CondDateId  = IDGen(dtimeObj.CondDateId)
+		updateData.Conddate.CondDateId  = supFunc.IDGen(dtimeObj.CondDateId)
 		updateData.Conddate.LocId = updateData.Loc.LocId
 
 		ctrlgValsColl.Find(bson.M{"ctrlingvals.ctrlsvalsid":bson.M{"$ne":""}}).Select(
 			bson.M{"ctrlingvals.ctrlvalsid":1}).Sort("-ctrlingvals.ctrlvalsid").Limit(1).One(&ctrlngValsObj)
-		updateData.CtrlgVals.CtrlingVals[0].CtrlValsId = IDGen(ctrlngValsObj.CtrlingVals[0].CtrlValsId)
+		updateData.CtrlgVals.CtrlingVals[0].CtrlValsId = supFunc.IDGen(ctrlngValsObj.CtrlingVals[0].CtrlValsId)
 		updateData.CtrlgVals.CondDateId = updateData.Conddate.CondDateId
 
 		ctrldValsColl.Find(bson.M{"ctrledvals.ctrldvalid":bson.M{"$ne":""}}).Select(
 			bson.M{"ctrledvals.ctrldvalid":1}).Sort("-ctrledvals.ctrldvalid").Limit(1).One(&ctrldValsObj)
-		updateData.CtrldVals.CtrledVals[0].CtrldValId = IDGen(ctrldValsObj.CtrledVals[0].CtrldValId)
+		updateData.CtrldVals.CtrledVals[0].CtrldValId = supFunc.IDGen(ctrldValsObj.CtrledVals[0].CtrldValId)
 		updateData.CtrldVals.CtrlValsId = updateData.CtrlgVals.CtrlingVals[0].CtrlValsId
 		err = locColl.Insert(updateData.Loc)
 		if err!= nil{
@@ -113,17 +127,17 @@ func UpdateGenControlData (updateData CR.GlobalCtrlData)string{
 		if(len(dtimeObj.Dtime)==0){
 			dtimeColl.Find(bson.M{"conddateid":bson.M{"$ne":""}}).Select(
 				bson.M{"conddateid":1}).Sort("-conddateid").Limit(1).One(&dtimeObj)
-			updateData.Conddate.CondDateId  = IDGen(dtimeObj.CondDateId)
+			updateData.Conddate.CondDateId  = supFunc.IDGen(dtimeObj.CondDateId)
 			updateData.Conddate.LocId = updateData.Loc.LocId
 
 			ctrlgValsColl.Find(bson.M{"ctrlingvals.ctrlsvalsid":bson.M{"$ne":""}}).Select(
 				bson.M{"ctrlingvals.ctrlvalsid":1}).Sort("-ctrlingvals.ctrlvalsid").Limit(1).One(&ctrlngValsObj)
-			updateData.CtrlgVals.CtrlingVals[0].CtrlValsId = IDGen(ctrlngValsObj.CtrlingVals[0].CtrlValsId)
+			updateData.CtrlgVals.CtrlingVals[0].CtrlValsId = supFunc.IDGen(ctrlngValsObj.CtrlingVals[0].CtrlValsId)
 			updateData.CtrlgVals.CondDateId = updateData.Conddate.CondDateId
 
 			ctrldValsColl.Find(bson.M{"ctrledvals.ctrldvalid":bson.M{"$ne":""}}).Select(
 				bson.M{"ctrledvals.ctrldvalid":1}).Sort("-ctrledvals.ctrldvalid").Limit(1).One(&ctrldValsObj)
-			updateData.CtrldVals.CtrledVals[0].CtrldValId = IDGen(ctrldValsObj.CtrledVals[0].CtrldValId)
+			updateData.CtrldVals.CtrledVals[0].CtrldValId = supFunc.IDGen(ctrldValsObj.CtrledVals[0].CtrldValId)
 			updateData.CtrldVals.CtrlValsId = updateData.CtrlgVals.CtrlingVals[0].CtrlValsId
 			err = dtimeColl.Insert(updateData.Conddate)
 			if err!= nil{

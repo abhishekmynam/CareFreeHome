@@ -5,6 +5,19 @@ import (
 	"math"
 //	"fmt"
 )
+type stats interface {
+	GetMode(numbers []float64)([]float64,int64)
+	GetStdDev(numbers []float64)float64
+	GetVariance(numbers []float64)float64
+	GetMean(numbers []float64)float64
+	SumOfSliceElements(numbers []float64)float64
+	RemoveOutliers(numbers []float64)[]float64
+}
+type statFuncs struct {
+}
+func Stats() stats{
+	return &statFuncs{}
+}
 
 func getOutliers( dataList []float64)(float64 ,float64){
 	var minOutlier  float64 =-999
@@ -64,7 +77,7 @@ func getOutliers( dataList []float64)(float64 ,float64){
 	return minOutlier,maxOutlier;
 }
 
-func GetMode(numbers []float64) (modes []float64, highestFrequency int64) {
+func (s statFuncs)GetMode(numbers []float64) (modes []float64, highestFrequency int64) {
 	frequencies := make(map[float64]int64, len(numbers))
 	//highestFrequency := 0
 	for _, x := range numbers {
@@ -85,34 +98,34 @@ func GetMode(numbers []float64) (modes []float64, highestFrequency int64) {
 	return modes, highestFrequency
 }
 
-func GetStdDev(numbers []float64) float64 {
+func (s statFuncs)GetStdDev(numbers []float64) float64 {
 
-	variance := GetVariance(numbers) / float64(len(numbers)-1)
+	variance := s.GetVariance(numbers) / float64(len(numbers)-1)
 	return math.Sqrt(variance)
 }
 
-func GetVariance(numbers []float64) float64 {
+func (s statFuncs)GetVariance(numbers []float64) float64 {
 	total := 0.0
 	for _, number := range numbers {
-		total += math.Pow(number-GetMean(numbers), 2)
+		total += math.Pow(number-s.GetMean(numbers), 2)
 	}
 	variance := total / float64(len(numbers)-1)
 	return variance
 }
 
-func GetMean(numbers []float64)float64{
-	mean := SumOfSliceElements(numbers) / float64(len(numbers))
+func (s statFuncs)GetMean(numbers []float64)float64{
+	mean := s.SumOfSliceElements(numbers) / float64(len(numbers))
 	return mean
 }
 
-func SumOfSliceElements(numbers []float64) (total float64) {
+func (s statFuncs)SumOfSliceElements(numbers []float64) (total float64) {
 	for _, x := range numbers {
 		total += x
 	}
 	return total
 }
 
-func RemoveOutliers (numbers []float64)[]float64{
+func(s statFuncs) RemoveOutliers (numbers []float64)[]float64{
 	//var outliersRemoved = make([] float64,0)
 	minOutliers, maxOutliers := getOutliers(numbers)
 	sort.Float64s(numbers)

@@ -8,7 +8,18 @@ import (
 	"time"
 )
 
-func SaveUser (newUser CR.User ) string {
+type insertIntoDB interface {
+	SaveUser(newUser CR.User ) string
+}
+
+type insertDB struct{
+}
+
+func InsertIntoDB() insertIntoDB{
+	return &insertDB{}
+}
+
+func (ins insertDB)SaveUser (newUser CR.User ) string {
 	var saveUserStat string
 	session, err:= mgo.Dial(CR.DBserver)
 	if err!= nil{
